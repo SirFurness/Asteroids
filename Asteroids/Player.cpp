@@ -7,6 +7,10 @@
 //
 
 #include "Player.hpp"
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+
+using namespace sf;
 
 void Player::init(sf::RenderWindow &window) {
     

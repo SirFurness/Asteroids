@@ -13,7 +13,7 @@
 #include <SFML/Graphics.hpp>
 
 class Entity {
-private:
+protected:
     
     int x, y, width, height;
     

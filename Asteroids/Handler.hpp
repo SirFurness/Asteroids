@@ -19,11 +19,10 @@
 class Handler {
 public:
     
-    std::vector<std::unique_ptr<Entity>> gameObjects;
+    std::vector<Entity*> gameObjects;
     
     void render(sf::RenderWindow &window);
     void update(sf::RenderWindow &window);
-    
 };
 
 
