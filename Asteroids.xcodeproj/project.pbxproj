@@ -12,6 +12,7 @@
 		073F8BFD1CF14D6100D127F9 /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 073F8BFC1CF14D6100D127F9 /* sansation.ttf */; };
 		073F8C071CF14F7B00D127F9 /* Handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 073F8C051CF14F7B00D127F9 /* Handler.cpp */; };
 		073F8C0D1CF15D6D00D127F9 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 073F8C0B1CF15D6D00D127F9 /* Player.cpp */; };
+		075EA2701CF3FDD800EB7605 /* asteroidShip.png in Resources */ = {isa = PBXBuildFile; fileRef = 075EA26F1CF3FDD800EB7605 /* asteroidShip.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		073F8C091CF1509C00D127F9 /* Entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 		073F8C0B1CF15D6D00D127F9 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		073F8C0C1CF15D6D00D127F9 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
+		075EA26F1CF3FDD800EB7605 /* asteroidShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroidShip.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		073F8BEF1CF14D6100D127F9 /* Asteroids */ = {
 			isa = PBXGroup;
 			children = (
+				075EA26F1CF3FDD800EB7605 /* asteroidShip.png */,
 				073F8BF21CF14D6100D127F9 /* ResourcePath.mm */,
 				073F8BF41CF14D6100D127F9 /* ResourcePath.hpp */,
 				073F8C0B1CF15D6D00D127F9 /* Player.cpp */,
@@ -145,6 +148,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				075EA2701CF3FDD800EB7605 /* asteroidShip.png in Resources */,
 				073F8BFD1CF14D6100D127F9 /* sansation.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

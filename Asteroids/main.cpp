@@ -12,9 +12,11 @@ int main(int, char const**)
     
     Handler handler;
     
-    Player player(10, 10, 100, 100);
+    Player *player = new Player(10, 10, 100, 100, 3);
     
-    handler.gameObjects.push_back(&player);
+    handler.gameObjects.push_back(player);
+    
+    handler.init(window);
     
     while (window.isOpen())
     {

@@ -12,9 +12,14 @@
 #define Player_hpp
 
 class Player : public Entity {
+private:
+    int health;
+    
+    sf::Sprite player;
+    sf::Texture texture;
     
 public:
-    Player(int x, int y, int width, int height) : Entity(x, y, width, height) {}
+    Player(int x, int y, int width, int height, int health) : Entity(x, y, width, height), health(health) {}
     
     
     void init(sf::RenderWindow &window);

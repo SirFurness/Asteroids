@@ -15,7 +15,8 @@
 class Entity {
 protected:
     
-    int x, y, width, height;
+    int x, y;
+    //int width, height;
     
 public:
     
@@ -26,13 +27,13 @@ public:
     
     int getX() {return x;}
     int getY() {return y;}
-    int getHeight() {return height;}
-    int getWidth() {return width;}
+    //int getHeight() {return height;}
+    //int getWidth() {return width;}
     
     void setX(int x) {this->x = x;}
     void setY(int y) {this->x = y;}
-    void setHeight(int height) {this->x = height;}
-    void setWidth(int width) {this->x = width;}
+    //void setHeight(int height) {this->x = height;}
+    //void setWidth(int width) {this->x = width;}
     
     Entity(int x, int y, int width, int height) : x(x), y(y), width(width), height(height) {}
     

@@ -23,6 +23,9 @@ public:
     
     void render(sf::RenderWindow &window);
     void update(sf::RenderWindow &window);
+    void init(sf::RenderWindow &window);
+    
+    ~Handler();
 };
 
 

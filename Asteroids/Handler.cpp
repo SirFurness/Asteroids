@@ -7,6 +7,23 @@
 //
 
 #include "Handler.hpp"
+#include <iostream>
+
+Handler::~Handler() {
+    for(int i = 0; i < gameObjects.size(); i++) {
+        delete gameObjects[i];
+    }
+}
+
+void Handler::init(sf::RenderWindow &window) {
+    
+    for(int i = 0; i < gameObjects.size(); i++) {
+        
+        gameObjects.at(i)->init(window);
+        
+    }
+    
+}
 
 void Handler::render(sf::RenderWindow &window) {
     
