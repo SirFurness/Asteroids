@@ -35,7 +35,7 @@ public:
     //void setHeight(int height) {this->x = height;}
     //void setWidth(int width) {this->x = width;}
     
-    Entity(int x, int y, int width, int height) : x(x), y(y), width(width), height(height) {}
+    Entity(int x, int y) : x(x), y(y) {}
     
 };
 

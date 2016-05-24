@@ -19,7 +19,7 @@ private:
     sf::Texture texture;
     
 public:
-    Player(int x, int y, int width, int height, int health) : Entity(x, y, width, height), health(health) {}
+    Player(int x, int y, int health) : Entity(x, y), health(health) {}
     
     
     void init(sf::RenderWindow &window);

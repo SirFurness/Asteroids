@@ -12,7 +12,7 @@ int main(int, char const**)
     
     Handler handler;
     
-    Player *player = new Player(10, 10, 100, 100, 3);
+    Player *player = new Player(10, 10, 3);
     
     handler.gameObjects.push_back(player);
     
