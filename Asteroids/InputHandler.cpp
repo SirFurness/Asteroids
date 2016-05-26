@@ -18,13 +18,7 @@ char InputHandler::createData(sf::Event event) {
             case sf::Keyboard::Up:
             case sf::Keyboard::W:
                 data |= upData;
-                data &= ~downData;
                 data &= ~upReleased;
-                break;
-            case sf::Keyboard::Down:
-            case sf::Keyboard::S:
-                data |= downData;
-                data &= ~upData;
                 break;
             default:
                 break;
@@ -55,10 +49,6 @@ char InputHandler::createData(sf::Event event) {
             case sf::Keyboard::W:
                 data |= upReleased;
                 data &= ~upData;
-                break;
-            case sf::Keyboard::Down:
-            case sf::Keyboard::S:
-                data &= ~downData;
                 break;
             default:
                 break;

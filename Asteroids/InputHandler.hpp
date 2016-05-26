@@ -13,7 +13,7 @@
 
 class InputHandler {
 private:
-    unsigned char data = 0, upData = 1<<7, downData = 1<<6, leftData = 1<<5, rightData = 1<<4, pressedData = 1<<3, releasedData = 1<<2, upReleased = 1<<1;
+    unsigned char data = 0, upData = 1<<7, emptyData = 1<<6, leftData = 1<<5, rightData = 1<<4, pressedData = 1<<3, releasedData = 1<<2, upReleased = 1<<1;
 public:
     char createData(sf::Event event);
 };

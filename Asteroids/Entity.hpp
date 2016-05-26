@@ -9,6 +9,7 @@
 #ifndef Entity_hpp
 #define Entity_hpp
 
+
 #include <SFML/Graphics.hpp>
 
 class Entity {
@@ -17,13 +18,17 @@ protected:
     int x, y;
     //int width, height;
     
+    void death();
+    
 public:
+    
+    sf::Sprite sprite;
     
     virtual void init(sf::RenderWindow &window) = 0;
     virtual void update(sf::RenderWindow &window) = 0;
     virtual void render(sf::RenderWindow &window) = 0;
     
-    virtual void notify(char data) = 0;
+    virtual bool notify(char data, bool collided) = 0;
     
     int getX() {return x;}
     int getY() {return y;}

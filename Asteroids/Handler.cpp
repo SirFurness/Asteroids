@@ -8,6 +8,7 @@
 
 #include "Handler.hpp"
 #include <iostream>
+#include <vector>
 
 Handler::~Handler() {
     for(int i = 0; i < gameObjects.size(); i++) {
@@ -15,11 +16,11 @@ Handler::~Handler() {
     }
 }
 
-void Handler::notify(char data) {
+void Handler::notify(char data, bool collided) {
     
     for(int i = 0; i < gameObjects.size(); i++) {
         
-        gameObjects.at(i)->notify(data);
+        gameObjects.at(i)->notify(data, collided);
         
     }
     
@@ -49,8 +50,36 @@ void Handler::update(sf::RenderWindow &window) {
     
     for(int i = 0; i < gameObjects.size(); i++) {
         
+        collision(gameObjects.at(i));
         gameObjects.at(i)->update(window);
         
+    }
+    
+}
+
+void Handler::collision(Entity *entityObject) {
+    
+    std::vector<int> erase;
+    
+    for(int i = 0; i < gameObjects.size(); i++) {
+        
+        sf::FloatRect object(entityObject->sprite.getGlobalBounds());
+        sf::FloatRect object2(gameObjects.at(i)->sprite.getGlobalBounds());
+        
+        if(object.intersects(object2) && object2 != object) {
+            
+            if(entityObject->notify(0,  true)) {
+                erase.push_back(i);
+            }
+            gameObjects.at(i)->notify(0, true);
+            
+        }
+        
+    }
+    
+    
+    for(int i = 0; i < erase.size(); i++) {
+        gameObjects.erase((gameObjects.begin()+erase.at(i))-1);
     }
     
 }

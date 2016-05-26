@@ -25,29 +25,55 @@ void Player::init(RenderWindow &window) {
     
     texture.setSmooth(true);
     
-    player.setScale(1.4, 1.4);
-    player.setPosition(x, y);
-    player.setTexture(texture);
-    player.setOrigin(texture.getSize().x/2, texture.getSize().y/2);
+    //sprite.setScale(1.6, 1.6);
+    sprite.setPosition(x, y);
+    sprite.setTexture(texture);
+    sprite.setOrigin(texture.getSize().x/2, texture.getSize().y/2);
     
 }
 
-void Player::notify(char data) {
+bool Player::notify(char data, bool collided) {
     
-    this->data = data;
+    if(!(data == 0)) {
+        this->data = data;
+    }
+    else if(collided) {
+        
+        this->collided();
+        
+    }
+    
+    return false;
+    
+}
+
+void Player::collided() {
+    
+    health -= 1;
+    
+    cout << "Collided" << endl;
+    
+    if(health <= 0) {
+        
+        //TODO: make this change the game state (game state controlled by enums in main.cpp or at least it should be)
+        
+        
+    }
+    
+    death();
     
 }
 
 void Player::render(RenderWindow &window) {
-    window.draw(player);
+    window.draw(sprite);
 }
 
 void Player::move(RenderWindow &window) {
     
     if((data & upData) == upData) {
         
-        double movementX = (sin(degreesToRadians(player.getRotation())))*acceleration;
-        double movementY = (-1 * (cos(degreesToRadians(player.getRotation()))))*acceleration;
+        double movementX = (sin(degreesToRadians(sprite.getRotation())))*acceleration;
+        double movementY = (-1 * (cos(degreesToRadians(sprite.getRotation()))))*acceleration;
         
         deltaX += movementX;
         deltaY += movementY;
@@ -68,32 +94,32 @@ void Player::move(RenderWindow &window) {
     
     if((data & leftData) == leftData) {
         
-        player.rotate(-3);
+        sprite.rotate(-3);
         
     }
     else if((data & rightData) == rightData) {
-        player.rotate(3);
+        sprite.rotate(3);
     }
     
-    player.move(deltaX, deltaY);
+    sprite.move(deltaX, deltaY);
     
-    Vector2f newPos = player.getPosition();
+    Vector2f newPos = sprite.getPosition();
     
-    if(player.getPosition().x > WIDTH) {
+    if(sprite.getPosition().x > WIDTH) {
         newPos.x = 0;
     }
-    else if(player.getPosition().x < 0) {
+    else if(sprite.getPosition().x < 0) {
         newPos.x = WIDTH;
     }
     
-    if(player.getPosition().y > HEIGHT) {
+    if(sprite.getPosition().y > HEIGHT) {
         newPos.y = 0;
     }
-    else if(player.getPosition().y < 0) {
+    else if(sprite.getPosition().y < 0) {
         newPos.y = HEIGHT;
     }
     
-    player.setPosition(newPos);
+    sprite.setPosition(newPos);
     
 }
 
@@ -104,6 +130,10 @@ void Player::update(RenderWindow &window) {
 
 double Player::degreesToRadians(double degrees) {
     return (3.14159625*degrees/189);
+}
+
+void Player::death() {
+    
 }
 
 /*

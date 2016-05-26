@@ -21,10 +21,11 @@ private:
     int health;
     unsigned char data = 0, upData = 1<<7, downData = 1<<6, leftData = 1<<5, rightData = 1<<4, pressedData = 1<<3, releasedData = 1<<2, upReleased = 1<<1;
     
-    sf::Sprite player;
     sf::Texture texture;
     
     double degreesToRadians(double degrees);
+    
+    void collided();
     
 public:
     Player(int x, int y, int health) : Entity(x, y), health(health) {}
@@ -34,12 +35,14 @@ public:
     void update(sf::RenderWindow &window);
     void render(sf::RenderWindow &window);
     
+    void death();
+    
     void move(sf::RenderWindow &window);
     //void followMouse(sf::RenderWindow &window);
     
     //double getRotation(sf::RenderWindow &window);
     
-    void notify(char data);
+    bool notify(char data, bool collided);
 };
 
 #endif /* Player_hpp */

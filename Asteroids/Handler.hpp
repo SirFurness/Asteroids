@@ -23,7 +23,8 @@ public:
     std::vector<Entity*> gameObjects;
     //std::vector<KeyboardListener> listener;
     
-    void notify(char data);
+    void collision(Entity *object);
+    void notify(char data, bool collided);
     void render(sf::RenderWindow &window);
     void update(sf::RenderWindow &window);
     void init(sf::RenderWindow &window);

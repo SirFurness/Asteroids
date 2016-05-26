@@ -7,6 +7,7 @@
 #include "ResourcePath.hpp"
 #include "Player.hpp"
 #include "InputHandler.hpp"
+#include "Asteroid.hpp"
 
 const int WIDTH = 800, HEIGHT = 600;
 
@@ -23,6 +24,7 @@ int main(int, char const**)
     
     Player *player = new Player(100, 100, 3);
     
+    handler.gameObjects.push_back(new Asteroid(100, 200));
     handler.gameObjects.push_back(player);
     
     handler.init(window);
@@ -39,7 +41,7 @@ int main(int, char const**)
             }
             
                 char data = inputHandler.createData(event);
-                handler.notify(data);
+                handler.notify(data, false);
             
         }
         
