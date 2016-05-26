@@ -2,22 +2,31 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include <iostream>
 #include "Handler.hpp"
 #include "ResourcePath.hpp"
 #include "Player.hpp"
+#include "InputHandler.hpp"
+
+const int WIDTH = 800, HEIGHT = 600;
 
 int main(int, char const**)
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Asteroids");
+    
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Asteroids");
+    
+    window.setFramerateLimit(60);
     
     Handler handler;
     
-    Player *player = new Player(10, 10, 3);
+    InputHandler inputHandler;
+    
+    Player *player = new Player(100, 100, 3);
     
     handler.gameObjects.push_back(player);
     
     handler.init(window);
-    
+
     while (window.isOpen())
     {
         
@@ -29,15 +38,19 @@ int main(int, char const**)
                 window.close();
             }
             
+                char data = inputHandler.createData(event);
+                handler.notify(data);
+            
         }
-
+        
         handler.update(window);
-
+        
         window.clear();
-
+        
         handler.render(window);
-
+        
         window.display();
+
     }
     
     window.close();

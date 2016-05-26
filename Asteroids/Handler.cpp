@@ -15,6 +15,16 @@ Handler::~Handler() {
     }
 }
 
+void Handler::notify(char data) {
+    
+    for(int i = 0; i < gameObjects.size(); i++) {
+        
+        gameObjects.at(i)->notify(data);
+        
+    }
+    
+}
+
 void Handler::init(sf::RenderWindow &window) {
     
     for(int i = 0; i < gameObjects.size(); i++) {
@@ -44,3 +54,13 @@ void Handler::update(sf::RenderWindow &window) {
     }
     
 }
+
+/*
+void Handler::listen(sf::RenderWindow &window) {
+    for(int i = 0; i < listener.size(); i++) {
+        
+        listener.at(i).listen(window);
+        
+    }
+}
+*/

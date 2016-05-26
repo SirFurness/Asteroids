@@ -9,7 +9,6 @@
 #ifndef Entity_hpp
 #define Entity_hpp
 
-
 #include <SFML/Graphics.hpp>
 
 class Entity {
@@ -24,6 +23,7 @@ public:
     virtual void update(sf::RenderWindow &window) = 0;
     virtual void render(sf::RenderWindow &window) = 0;
     
+    virtual void notify(char data) = 0;
     
     int getX() {return x;}
     int getY() {return y;}
