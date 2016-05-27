@@ -25,11 +25,35 @@ private:
     
     double degreesToRadians(double degrees);
     
+    /*this counts the frames that have passed since the invisiblity frames started. once it reaches a certain number it stops
+     to start invicbility frames again don't call the function just set this framesPassed to 0;
+     */
+    int framesPassed = 0;
+    
+    //should draw the sprite. this is here so that sprite flickering can happen during invincibility frames
+    bool draw = true;
+    
+    //keeps track of it being everyother frame for invinciblity frames
+    bool everyother = false;
+    
+    //makes it so that to move forward after dying the player has to release the key and then press it down again
+    bool waitUntilReleased = false;
+    
+    //speed that ship flickers at
+    int flickerSpeed = 4;
+    
+    //length in seconds that the sprite flickering should last
+    int flickerLength = 1;
+    
+    //says whether spriteflickering is active so that game knows not to take damage
+    bool isFlickering = false;
+    
     void collided();
     
 public:
     Player(int x, int y, int health) : Entity(x, y), health(health) {}
     
+    void invincibilityFrames();
     
     void init(sf::RenderWindow &window);
     void update(sf::RenderWindow &window);

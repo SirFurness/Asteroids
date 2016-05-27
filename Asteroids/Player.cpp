@@ -38,8 +38,9 @@ bool Player::notify(char data, bool collided) {
         this->data = data;
     }
     else if(collided) {
-        
-        this->collided();
+        if(!isFlickering) {
+            this->collided();
+        }
         
     }
     
@@ -47,11 +48,34 @@ bool Player::notify(char data, bool collided) {
     
 }
 
+void Player::invincibilityFrames() {
+    
+    if(!(framesPassed >= (60*flickerLength))) {
+        isFlickering = true;
+        
+        framesPassed += 1;
+        
+        if((framesPassed%flickerSpeed)==0) {
+            everyother = !everyother;
+        }
+            
+        if(everyother) {
+            draw = true;
+        }
+        else {
+            draw = false;
+        }
+    }
+    else {
+        isFlickering = false;
+        draw = true;
+    }
+
+}
+
 void Player::collided() {
     
     health -= 1;
-    
-    cout << "Collided" << endl;
     
     if(health <= 0) {
         
@@ -65,61 +89,68 @@ void Player::collided() {
 }
 
 void Player::render(RenderWindow &window) {
-    window.draw(sprite);
+    invincibilityFrames();
+    
+    if(draw)
+        window.draw(sprite);
 }
 
 void Player::move(RenderWindow &window) {
-    
-    if((data & upData) == upData) {
-        
-        double movementX = (sin(degreesToRadians(sprite.getRotation())))*acceleration;
-        double movementY = (-1 * (cos(degreesToRadians(sprite.getRotation()))))*acceleration;
-        
-        deltaX += movementX;
-        deltaY += movementY;
-        
-        if((deltaX/movementX) > maxSpeed) {
-            deltaX = maxSpeed*movementX;
+    if(!waitUntilReleased) {
+        if((data & upData) == upData) {
+            
+            double movementX = (sin(degreesToRadians(sprite.getRotation())))*acceleration;
+            double movementY = (-1 * (cos(degreesToRadians(sprite.getRotation()))))*acceleration;
+            
+            deltaX += movementX;
+            deltaY += movementY;
+            
+            if((deltaX/movementX) > maxSpeed) {
+                deltaX = maxSpeed*movementX;
+            }
+            
+            if((deltaY/movementY) > maxSpeed) {
+                deltaY = maxSpeed*movementY;
+            }
+            
+        }
+        else {
+            deltaX *= friction;
+            deltaY *= friction;
         }
         
-        if((deltaY/movementY) > maxSpeed) {
-            deltaY = maxSpeed*movementY;
+        if((data & leftData) == leftData) {
+            
+            sprite.rotate(-3);
+            
+        }
+        else if((data & rightData) == rightData) {
+            sprite.rotate(3);
         }
         
-    }
-    else {
-        deltaX *= friction;
-        deltaY *= friction;
-    }
-    
-    if((data & leftData) == leftData) {
+        sprite.move(deltaX, deltaY);
         
-        sprite.rotate(-3);
+        Vector2f newPos = sprite.getPosition();
         
+        if(sprite.getPosition().x > WIDTH) {
+            newPos.x = 0;
+        }
+        else if(sprite.getPosition().x < 0) {
+            newPos.x = WIDTH;
+        }
+        
+        if(sprite.getPosition().y > HEIGHT) {
+            newPos.y = 0;
+        }
+        else if(sprite.getPosition().y < 0) {
+            newPos.y = HEIGHT;
+        }
+        
+        sprite.setPosition(newPos);
     }
-    else if((data & rightData) == rightData) {
-        sprite.rotate(3);
+    else if((data & upReleased) == upReleased) {
+        waitUntilReleased = false;
     }
-    
-    sprite.move(deltaX, deltaY);
-    
-    Vector2f newPos = sprite.getPosition();
-    
-    if(sprite.getPosition().x > WIDTH) {
-        newPos.x = 0;
-    }
-    else if(sprite.getPosition().x < 0) {
-        newPos.x = WIDTH;
-    }
-    
-    if(sprite.getPosition().y > HEIGHT) {
-        newPos.y = 0;
-    }
-    else if(sprite.getPosition().y < 0) {
-        newPos.y = HEIGHT;
-    }
-    
-    sprite.setPosition(newPos);
     
 }
 
@@ -133,6 +164,15 @@ double Player::degreesToRadians(double degrees) {
 }
 
 void Player::death() {
+
+    sprite.setPosition(WIDTH/2, HEIGHT/2);
+    
+    deltaX = 0;
+    deltaY = 0;
+    
+    waitUntilReleased = true;
+    
+    framesPassed = 0;
     
 }
 

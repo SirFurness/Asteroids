@@ -22,7 +22,7 @@ int main(int, char const**)
     
     InputHandler inputHandler;
     
-    Player *player = new Player(100, 100, 3);
+    Player *player = new Player(WIDTH/2, HEIGHT/2, 3);
     
     handler.gameObjects.push_back(new Asteroid(100, 200));
     handler.gameObjects.push_back(player);
