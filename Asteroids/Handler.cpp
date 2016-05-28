@@ -16,11 +16,14 @@ Handler::~Handler() {
     }
 }
 
-void Handler::notify(char data, bool collided) {
+void Handler::notify(char data, char otherData) {
     
     for(int i = 0; i < gameObjects.size(); i++) {
         
-        gameObjects.at(i)->notify(data, collided);
+        if(gameObjects.at(i)->notify(data, otherData)) {
+            gameObjects.at(i) = gameObjects.back();
+            gameObjects.pop_back();
+        }
         
     }
     
@@ -36,30 +39,34 @@ void Handler::init(sf::RenderWindow &window) {
     
 }
 
-void Handler::render(sf::RenderWindow &window) {
+void Handler::render(sf::RenderWindow &window, game_state_t gameState) {
     
-    for(int i = 0; i < gameObjects.size(); i++) {
+    if(gameState == PLAYING) {
         
-        gameObjects.at(i)->render(window);
-        
+        for(int i = 0; i < gameObjects.size(); i++) {
+            
+            gameObjects.at(i)->render(window);
+            
+        }
     }
     
 }
 
-void Handler::update(sf::RenderWindow &window) {
+void Handler::update(sf::RenderWindow &window, game_state_t gameState) {
     
-    for(int i = 0; i < gameObjects.size(); i++) {
+    if(gameState == PLAYING) {
         
-        collision(gameObjects.at(i));
-        gameObjects.at(i)->update(window);
-        
+        for(int i = 0; i < gameObjects.size(); i++) {
+            
+            gameObjects.at(i)->update(window);
+            collision(gameObjects.at(i));
+            
+        }
     }
     
 }
 
 void Handler::collision(Entity *entityObject) {
-    
-    std::vector<int> erase;
     
     for(int i = 0; i < gameObjects.size(); i++) {
         
@@ -68,28 +75,39 @@ void Handler::collision(Entity *entityObject) {
         
         if(object.intersects(object2) && object2 != object) {
             
-            if(entityObject->notify(0,  true)) {
-                erase.push_back(i);
-            }
-            gameObjects.at(i)->notify(0, true);
+            otherData |= collidedData;
             
+            if(gameObjects.at(i)->notify(0, otherData)) {
+                gameObjects.at(i) = gameObjects.back();
+                gameObjects.pop_back();
+            }
+            
+            decltype(gameObjects)::iterator it = gameObjects.begin();
+            
+            it = std::find(gameObjects.begin(), gameObjects.end(), entityObject);
+            
+            int position = 0;
+            
+            if(it != gameObjects.end()) {
+                position = std::distance(gameObjects.begin(), it);
+            }
+            if(entityObject->notify(0,  otherData)) {
+                gameObjects.at(position) = gameObjects.back();
+                gameObjects.pop_back();
+                
+            }
         }
         
-    }
-    
-    
-    for(int i = 0; i < erase.size(); i++) {
-        gameObjects.erase((gameObjects.begin()+erase.at(i))-1);
     }
     
 }
 
 /*
-void Handler::listen(sf::RenderWindow &window) {
-    for(int i = 0; i < listener.size(); i++) {
-        
-        listener.at(i).listen(window);
-        
-    }
-}
-*/
+ void Handler::listen(sf::RenderWindow &window) {
+ for(int i = 0; i < listener.size(); i++) {
+ 
+ listener.at(i).listen(window);
+ 
+ }
+ }
+ */

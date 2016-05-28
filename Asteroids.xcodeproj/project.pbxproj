@@ -15,6 +15,7 @@
 		074A0AC41CF75D8900887B77 /* Asteroid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 074A0AC21CF75D8900887B77 /* Asteroid.cpp */; };
 		075EA2701CF3FDD800EB7605 /* asteroidShip.png in Resources */ = {isa = PBXBuildFile; fileRef = 075EA26F1CF3FDD800EB7605 /* asteroidShip.png */; };
 		07D17A491CF7A65B000AC6DE /* asteroid.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D17A481CF7A65B000AC6DE /* asteroid.png */; };
+		07D32A6E1CF927BF003AA79E /* asteroidShipMoving.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D32A6D1CF927BF003AA79E /* asteroidShipMoving.png */; };
 		07DEDB971CF530FE00C8384A /* InputHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07DEDB951CF530FE00C8384A /* InputHandler.cpp */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,8 @@
 		074A0AC31CF75D8900887B77 /* Asteroid.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Asteroid.hpp; sourceTree = "<group>"; };
 		075EA26F1CF3FDD800EB7605 /* asteroidShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroidShip.png; sourceTree = "<group>"; };
 		07D17A481CF7A65B000AC6DE /* asteroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroid.png; sourceTree = "<group>"; };
+		07D32A691CF90E6B003AA79E /* game_state_t.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = game_state_t.hpp; sourceTree = "<group>"; };
+		07D32A6D1CF927BF003AA79E /* asteroidShipMoving.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroidShipMoving.png; sourceTree = "<group>"; };
 		07DEDB951CF530FE00C8384A /* InputHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputHandler.cpp; sourceTree = "<group>"; };
 		07DEDB961CF530FE00C8384A /* InputHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputHandler.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,16 +71,14 @@
 		073F8BEF1CF14D6100D127F9 /* Asteroids */ = {
 			isa = PBXGroup;
 			children = (
+				07D32A641CF90C19003AA79E /* Handlers */,
 				075EA2741CF4254E00EB7605 /* Entities */,
-				073F8BF21CF14D6100D127F9 /* ResourcePath.mm */,
-				073F8BF41CF14D6100D127F9 /* ResourcePath.hpp */,
-				07DEDB951CF530FE00C8384A /* InputHandler.cpp */,
-				07DEDB961CF530FE00C8384A /* InputHandler.hpp */,
-				073F8C051CF14F7B00D127F9 /* Handler.cpp */,
-				073F8C061CF14F7B00D127F9 /* Handler.hpp */,
 				073F8BF51CF14D6100D127F9 /* main.cpp */,
+				07D32A691CF90E6B003AA79E /* game_state_t.hpp */,
 				073F8BF71CF14D6100D127F9 /* Resources */,
 				073F8BF01CF14D6100D127F9 /* Supporting Files */,
+				073F8BF21CF14D6100D127F9 /* ResourcePath.mm */,
+				073F8BF41CF14D6100D127F9 /* ResourcePath.hpp */,
 			);
 			path = Asteroids;
 			sourceTree = "<group>";
@@ -93,6 +94,7 @@
 		073F8BF71CF14D6100D127F9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				07D32A6D1CF927BF003AA79E /* asteroidShipMoving.png */,
 				07D17A481CF7A65B000AC6DE /* asteroid.png */,
 				075EA26F1CF3FDD800EB7605 /* asteroidShip.png */,
 				073F8BFC1CF14D6100D127F9 /* sansation.ttf */,
@@ -110,6 +112,17 @@
 				074A0AC31CF75D8900887B77 /* Asteroid.hpp */,
 			);
 			name = Entities;
+			sourceTree = "<group>";
+		};
+		07D32A641CF90C19003AA79E /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				07DEDB951CF530FE00C8384A /* InputHandler.cpp */,
+				07DEDB961CF530FE00C8384A /* InputHandler.hpp */,
+				073F8C051CF14F7B00D127F9 /* Handler.cpp */,
+				073F8C061CF14F7B00D127F9 /* Handler.hpp */,
+			);
+			name = Handlers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +182,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07D32A6E1CF927BF003AA79E /* asteroidShipMoving.png in Resources */,
 				075EA2701CF3FDD800EB7605 /* asteroidShip.png in Resources */,
 				073F8BFD1CF14D6100D127F9 /* sansation.ttf in Resources */,
 				07D17A491CF7A65B000AC6DE /* asteroid.png in Resources */,

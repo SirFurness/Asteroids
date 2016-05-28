@@ -25,6 +25,13 @@ void Player::init(RenderWindow &window) {
     
     texture.setSmooth(true);
     
+    if(!moveTexture.loadFromFile(resourcePath()+"asteroidShipMoving.png")) {
+        std::cout << "Couldn't load moving ship texture!" << std::endl;
+        return EXIT_FAILURE;
+    }
+    
+    moveTexture.setSmooth(true);
+    
     //sprite.setScale(1.6, 1.6);
     sprite.setPosition(x, y);
     sprite.setTexture(texture);
@@ -32,46 +39,48 @@ void Player::init(RenderWindow &window) {
     
 }
 
-bool Player::notify(char data, bool collided) {
+bool Player::notify(char keyData, char &otherData) {
     
-    if(!(data == 0)) {
-        this->data = data;
+    if(!(keyData == 0)) {
+        this->keyData = keyData;
     }
-    else if(collided) {
-        if(!isFlickering) {
-            this->collided();
+    
+    if(isFlickeringInv) {
+        
+        otherData |= isInvincible;
+        
+    }
+    else {
+        
+        otherData &= ~isInvincible;
+        
+    }
+    
+    if(!(otherData == 0)) {
+        
+        if((otherData & collidedData) == collidedData && !(isFlickeringInv)) {
+            collided();
         }
         
     }
+    
+    /*
+     if(!(data == 0)) {
+     this->data = data;
+     }
+     else if(collided) {
+     if(!isFlickering) {
+     this->collided();
+     }
+     
+     }
+     */
     
     return false;
     
 }
 
-void Player::invincibilityFrames() {
-    
-    if(!(framesPassed >= (60*flickerLength))) {
-        isFlickering = true;
-        
-        framesPassed += 1;
-        
-        if((framesPassed%flickerSpeed)==0) {
-            everyother = !everyother;
-        }
-            
-        if(everyother) {
-            draw = true;
-        }
-        else {
-            draw = false;
-        }
-    }
-    else {
-        isFlickering = false;
-        draw = true;
-    }
 
-}
 
 void Player::collided() {
     
@@ -91,13 +100,70 @@ void Player::collided() {
 void Player::render(RenderWindow &window) {
     invincibilityFrames();
     
+    movementFrames();
+    
     if(draw)
         window.draw(sprite);
 }
 
+void Player::invincibilityFrames() {
+    
+    if(!(framesPassedInv >= (60*flickerLengthInv))) {
+        isFlickeringInv = true;
+        
+        framesPassedInv += 1;
+        
+        if((framesPassedInv%flickerSpeedInv)==0) {
+            everyotherInv = !everyotherInv;
+        }
+        
+        if(everyotherInv) {
+            draw = true;
+        }
+        else {
+            draw = false;
+        }
+    }
+    else {
+        isFlickeringInv = false;
+        draw = true;
+    }
+    
+}
+
+void Player::movementFrames() {
+    isFlickeringMove = true;
+    
+    framesPassedMove += 1;
+    
+    if((framesPassedMove%flickerSpeedMove) == 0) {
+        everyotherMove = !everyotherMove;
+    }
+    
+    if(everyotherMove && movingUp) {
+        drawMove = true;
+    }
+    else {
+        drawMove = false;
+    }
+    
+    if(waitUntilReleased) {
+        drawMove = false;
+    }
+    
+    if(drawMove) {
+        sprite.setTexture(moveTexture);
+    }
+    else {
+        sprite.setTexture(texture);
+    }
+    
+    
+}
+
 void Player::move(RenderWindow &window) {
     if(!waitUntilReleased) {
-        if((data & upData) == upData) {
+        if((keyData & upData) == upData) {
             
             double movementX = (sin(degreesToRadians(sprite.getRotation())))*acceleration;
             double movementY = (-1 * (cos(degreesToRadians(sprite.getRotation()))))*acceleration;
@@ -113,18 +179,24 @@ void Player::move(RenderWindow &window) {
                 deltaY = maxSpeed*movementY;
             }
             
+            movingUp = true;
+            
+            
         }
         else {
             deltaX *= friction;
             deltaY *= friction;
+            movingUp = false;
+            isFlickeringMove = false;
+            
         }
         
-        if((data & leftData) == leftData) {
+        if((keyData & leftData) == leftData) {
             
             sprite.rotate(-3);
             
         }
-        else if((data & rightData) == rightData) {
+        else if((keyData & rightData) == rightData) {
             sprite.rotate(3);
         }
         
@@ -148,7 +220,7 @@ void Player::move(RenderWindow &window) {
         
         sprite.setPosition(newPos);
     }
-    else if((data & upReleased) == upReleased) {
+    else if((keyData & upReleased) == upReleased) {
         waitUntilReleased = false;
     }
     
@@ -164,7 +236,7 @@ double Player::degreesToRadians(double degrees) {
 }
 
 void Player::death() {
-
+    
     sprite.setPosition(WIDTH/2, HEIGHT/2);
     
     deltaX = 0;
@@ -172,8 +244,7 @@ void Player::death() {
     
     waitUntilReleased = true;
     
-    framesPassed = 0;
-    
+    framesPassedInv = 0;
 }
 
 /*

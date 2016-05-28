@@ -15,12 +15,20 @@
 
 class Asteroid : public Entity {
 private:
+    const int WIDTH = 800, HEIGHT = 600;
+    
     sf::Texture texture;
+    
+    double deltaX = 0, deltaY = 0;
+    
+    int acceleration = 2;
+    
+    unsigned isInvincible = 1<<7, collidedData = 1<<6;
 public:
     
     Asteroid(int x, int y) : Entity(x, y) {}
     
-    bool notify(char data, bool collided);
+    bool notify(char keyData, char &otherData);
     void init(sf::RenderWindow &window);
     void update(sf::RenderWindow &window);
     void render(sf::RenderWindow &window);

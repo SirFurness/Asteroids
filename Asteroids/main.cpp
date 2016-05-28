@@ -8,11 +8,14 @@
 #include "Player.hpp"
 #include "InputHandler.hpp"
 #include "Asteroid.hpp"
+#include "game_state_t.hpp"
 
 const int WIDTH = 800, HEIGHT = 600;
 
 int main(int, char const**)
 {
+    
+    game_state_t gameState = PLAYING;
     
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Asteroids");
     
@@ -28,7 +31,7 @@ int main(int, char const**)
     handler.gameObjects.push_back(player);
     
     handler.init(window);
-
+    
     while (window.isOpen())
     {
         
@@ -40,19 +43,19 @@ int main(int, char const**)
                 window.close();
             }
             
-                char data = inputHandler.createData(event);
-                handler.notify(data, false);
+            char data = inputHandler.createData(event);
+            handler.notify(data, false);
             
         }
         
-        handler.update(window);
+        handler.update(window, gameState);
         
         window.clear();
         
-        handler.render(window);
+        handler.render(window, gameState);
         
         window.display();
-
+        
     }
     
     window.close();

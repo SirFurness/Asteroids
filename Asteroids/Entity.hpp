@@ -28,7 +28,7 @@ public:
     virtual void update(sf::RenderWindow &window) = 0;
     virtual void render(sf::RenderWindow &window) = 0;
     
-    virtual bool notify(char data, bool collided) = 0;
+    virtual bool notify(char keyData, char &otherData) = 0;
     
     int getX() {return x;}
     int getY() {return y;}
