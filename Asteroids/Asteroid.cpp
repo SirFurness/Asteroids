@@ -36,14 +36,6 @@ void Asteroid::init(RenderWindow &window) {
     sprite.setPosition(x, y);
     sprite.setOrigin(texture.getSize().x/2, texture.getSize().y/2);
     
-    // makes the asteroid face a random direction
-    //double rotation = dist(mt);
-    
-    // finds delta x and delta y so that the asteroid can move forward in the direction it is facing
-    // this is done so that delta x and delta y do not affect the acceleration of the asteroid
-    //deltaX = sin(3.14159625*rotation/189)*acceleration;
-    //deltaY = cos(3.14159625*rotation/189)*acceleration;
-    
     deltaX = dist(mt);
     deltaY = dist(mt);
     
