@@ -20,13 +20,13 @@ private:
     sf::Texture texture;
     
     double deltaX = 0, deltaY = 0;
-    
+   
     int acceleration = 2;
     
     unsigned isInvincible = 1<<7, collidedData = 1<<6;
 public:
     
-    Asteroid(int x, int y) : Entity(x, y) {}
+    Asteroid(int x, int y, entity_t entityType) : Entity(x, y, entityType) {}
     
     bool notify(char keyData, char &otherData);
     void init(sf::RenderWindow &window);

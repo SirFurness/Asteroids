@@ -25,6 +25,7 @@ private:
     
     sf::Texture texture, moveTexture;
     
+    // converts degrees to radians so that sin and cos function can be used more easily
     double degreesToRadians(double degrees);
     
     /*this counts the frames that have passed since the invisiblity frames started. once it reaches a certain number it stops
@@ -50,19 +51,23 @@ private:
     //says whether spriteflickering is active so that game knows not to take damage
     bool isFlickeringInv = true;
     
+    // these do the exact same thing as the variables above except for the accerleration image and not the player
     bool everyotherMove = false, flickerSpeedMove = 2, isFlickeringMove = true, drawMove = false;
     int framesPassedMove = 0;
     
+    // keeps track of whether the player is moving up or not
     bool movingUp = false;
     
     void collided();
     
+    // handles the flickering or the movement image
     void movementFrames();
     
+    // handlers the sprite flickering when invincible
     void invincibilityFrames();
     
 public:
-    Player(int x, int y, int health) : Entity(x, y), health(health) {}
+    Player(int x, int y, int health, entity_t entityType) : Entity(x, y, entityType), health(health) {}
     
     void init(sf::RenderWindow &window);
     void update(sf::RenderWindow &window);
@@ -71,9 +76,6 @@ public:
     void death();
     
     void move(sf::RenderWindow &window);
-    //void followMouse(sf::RenderWindow &window);
-    
-    //double getRotation(sf::RenderWindow &window);
     
     bool notify(char keyData, char &otherData);
 };

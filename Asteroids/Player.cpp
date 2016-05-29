@@ -41,6 +41,7 @@ void Player::init(RenderWindow &window) {
 
 bool Player::notify(char keyData, char &otherData) {
     
+    
     if(!(keyData == 0)) {
         this->keyData = keyData;
     }

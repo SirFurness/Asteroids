@@ -9,12 +9,14 @@
 #include "InputHandler.hpp"
 #include "Asteroid.hpp"
 #include "game_state_t.hpp"
+#include "entity_t.hpp"
+
+// initiates the game and has the game loop
 
 const int WIDTH = 800, HEIGHT = 600;
 
 int main(int, char const**)
 {
-    
     game_state_t gameState = PLAYING;
     
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Asteroids");
@@ -25,9 +27,10 @@ int main(int, char const**)
     
     InputHandler inputHandler;
     
-    Player *player = new Player(WIDTH/2, HEIGHT/2, 3);
+    Player *player = new Player(WIDTH/2, HEIGHT/2, 3, PLAYER);
     
-    handler.gameObjects.push_back(new Asteroid(100, 200));
+    handler.gameObjects.push_back(new Asteroid(100, 200, ASTEROID));
+    handler.gameObjects.push_back(new Asteroid(200, 100, ASTEROID));
     handler.gameObjects.push_back(player);
     
     handler.init(window);
@@ -42,12 +45,10 @@ int main(int, char const**)
             if(event.type == sf::Event::Closed) {
                 window.close();
             }
-            
             char data = inputHandler.createData(event);
             handler.notify(data, false);
             
         }
-        
         handler.update(window, gameState);
         
         window.clear();

@@ -11,16 +11,22 @@
 #include "ResourcePath.hpp"
 #include <algorithm>
 #include <cmath>
+#include <random>
 
 using namespace sf;
 using namespace std;
 
 void Asteroid::init(RenderWindow &window) {
     
-    srand((double) time(0));
+    random_device rd;
     
-    acceleration = rand() % 5 + 1;
+    mt19937 mt(rd());
     
+    uniform_int_distribution<int> dist(-5, 5);
+    
+    acceleration = dist(mt);
+    
+    // loads the asteroid image
     if(!texture.loadFromFile(resourcePath()+"asteroid.png")) {
         cout << "Couldn't load asteroid image!" << endl;
         return EXIT_FAILURE;
@@ -30,14 +36,21 @@ void Asteroid::init(RenderWindow &window) {
     sprite.setPosition(x, y);
     sprite.setOrigin(texture.getSize().x/2, texture.getSize().y/2);
     
-    double rotation = rand() % 100 +1;
+    // makes the asteroid face a random direction
+    //double rotation = dist(mt);
     
-    deltaX = sin(3.14159625*rotation/189)*acceleration;
-    deltaY = cos(3.14159625*rotation/189)*acceleration;
+    // finds delta x and delta y so that the asteroid can move forward in the direction it is facing
+    // this is done so that delta x and delta y do not affect the acceleration of the asteroid
+    //deltaX = sin(3.14159625*rotation/189)*acceleration;
+    //deltaY = cos(3.14159625*rotation/189)*acceleration;
+    
+    deltaX = dist(mt);
+    deltaY = dist(mt);
     
     
 }
 
+// just moves the asteroid and makes it wrap around
 void Asteroid::update(RenderWindow &window) {
     sprite.move(deltaX, deltaY);
     
@@ -59,23 +72,23 @@ void Asteroid::update(RenderWindow &window) {
     
     sprite.setPosition(newPos);
 }
-
 void Asteroid::render(RenderWindow &window) {
     window.draw(sprite);
 }
 
 bool Asteroid::notify(char keyData, char &otherData) {
-    
     bool shouldKill = true;
     
     if((otherData & isInvincible) == isInvincible) {
-        return false;
+        shouldKill = false;
     }
     
     if((otherData & collidedData) == collidedData && shouldKill == true) {
+        // this means the asteroid will be destroyed
         return true;
     }
     
+    // this means that the asteroid should not be destroyed
     return false;
     
 }

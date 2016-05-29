@@ -11,12 +11,15 @@
 
 
 #include <SFML/Graphics.hpp>
+#include "entity_t.hpp"
 
 class Entity {
 protected:
     
     int x, y;
     //int width, height;
+    
+    entity_t entityType;
     
     void death();
     
@@ -40,7 +43,10 @@ public:
     //void setHeight(int height) {this->x = height;}
     //void setWidth(int width) {this->x = width;}
     
-    Entity(int x, int y) : x(x), y(y) {}
+    void setEntityType(entity_t entityType) {this->entityType = entityType;}
+    entity_t getEntityType() {return entityType;}
+    
+    Entity(int x, int y, entity_t entityType) : x(x), y(y), entityType(entityType) {}
     
 };
 

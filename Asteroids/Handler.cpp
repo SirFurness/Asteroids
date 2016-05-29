@@ -9,7 +9,9 @@
 #include "Handler.hpp"
 #include <iostream>
 #include <vector>
+#include "Asteroid.hpp"
 
+// this is not good programming practice but I'm too lazy to fix it
 Handler::~Handler() {
     for(int i = 0; i < gameObjects.size(); i++) {
         delete gameObjects[i];
@@ -23,6 +25,7 @@ void Handler::notify(char data, char otherData) {
         if(gameObjects.at(i)->notify(data, otherData)) {
             gameObjects.at(i) = gameObjects.back();
             gameObjects.pop_back();
+
         }
         
     }
@@ -62,6 +65,7 @@ void Handler::update(sf::RenderWindow &window, game_state_t gameState) {
             collision(gameObjects.at(i));
             
         }
+        
     }
     
 }
@@ -73,7 +77,7 @@ void Handler::collision(Entity *entityObject) {
         sf::FloatRect object(entityObject->sprite.getGlobalBounds());
         sf::FloatRect object2(gameObjects.at(i)->sprite.getGlobalBounds());
         
-        if(object.intersects(object2) && object2 != object) {
+        if(object.intersects(object2) && object2 != object && entityObject->getEntityType() != gameObjects.at(i)->getEntityType()) {
             
             otherData |= collidedData;
             

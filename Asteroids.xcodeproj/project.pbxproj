@@ -20,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		073DB55E1CFA7E830086A199 /* entity_t.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = entity_t.hpp; sourceTree = "<group>"; };
 		073F8BED1CF14D6100D127F9 /* Asteroids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Asteroids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		073F8BF11CF14D6100D127F9 /* Asteroids-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Asteroids-Info.plist"; sourceTree = "<group>"; };
 		073F8BF21CF14D6100D127F9 /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
@@ -52,6 +53,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		073DB55C1CFA7E350086A199 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				073DB55E1CFA7E830086A199 /* entity_t.hpp */,
+				07D32A691CF90E6B003AA79E /* game_state_t.hpp */,
+			);
+			name = Enums;
+			sourceTree = "<group>";
+		};
 		073F8BE31CF14D6100D127F9 = {
 			isa = PBXGroup;
 			children = (
@@ -71,10 +81,10 @@
 		073F8BEF1CF14D6100D127F9 /* Asteroids */ = {
 			isa = PBXGroup;
 			children = (
+				073DB55C1CFA7E350086A199 /* Enums */,
 				07D32A641CF90C19003AA79E /* Handlers */,
 				075EA2741CF4254E00EB7605 /* Entities */,
 				073F8BF51CF14D6100D127F9 /* main.cpp */,
-				07D32A691CF90E6B003AA79E /* game_state_t.hpp */,
 				073F8BF71CF14D6100D127F9 /* Resources */,
 				073F8BF01CF14D6100D127F9 /* Supporting Files */,
 				073F8BF21CF14D6100D127F9 /* ResourcePath.mm */,
