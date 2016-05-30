@@ -67,17 +67,19 @@ private:
     void invincibilityFrames();
     
 public:
-    Player(int x, int y, int health, entity_t entityType) : Entity(x, y, entityType), health(health) {}
+    Player(int x, int y, int health, entity_t entityType, entity_state_t entityState) : Entity(x, y, entityType, entityState), health(health) {}
+    ~Player() {}
     
     void init(sf::RenderWindow &window);
     void update(sf::RenderWindow &window);
     void render(sf::RenderWindow &window);
+    void collision(entity_t type);
     
     void death();
     
     void move(sf::RenderWindow &window);
     
-    bool notify(char keyData, char &otherData);
+    void notify(char keyData);
 };
 
 #endif /* Player_hpp */

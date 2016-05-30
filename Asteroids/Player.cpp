@@ -39,62 +39,24 @@ void Player::init(RenderWindow &window) {
     
 }
 
-bool Player::notify(char keyData, char &otherData) {
+void Player::notify(char keyData) {
     
     
     if(!(keyData == 0)) {
         this->keyData = keyData;
     }
     
-    if(isFlickeringInv) {
-        
-        otherData |= isInvincible;
-        
-    }
-    else {
-        
-        otherData &= ~isInvincible;
-        
-    }
-    
-    if(!(otherData == 0)) {
-        
-        if((otherData & collidedData) == collidedData && !(isFlickeringInv)) {
-            collided();
-        }
-        
-    }
-    
-    /*
-     if(!(data == 0)) {
-     this->data = data;
-     }
-     else if(collided) {
-     if(!isFlickering) {
-     this->collided();
-     }
-     
-     }
-     */
-    
-    return false;
-    
 }
 
-
-
-void Player::collided() {
+void Player::collision(entity_t type) {
     
-    health -= 1;
-    
-    if(health <= 0) {
-        
-        //TODO: make this change the game state (game state controlled by enums in main.cpp or at least it should be)
-        
-        
+    if(type == ASTEROID) {
+        death();
     }
     
-    death();
+    if(type == BULLET) {
+        death();
+    }
     
 }
 
@@ -238,6 +200,7 @@ double Player::degreesToRadians(double degrees) {
 
 void Player::death() {
     
+    /*
     sprite.setPosition(WIDTH/2, HEIGHT/2);
     
     deltaX = 0;
@@ -246,6 +209,7 @@ void Player::death() {
     waitUntilReleased = true;
     
     framesPassedInv = 0;
+     */
 }
 
 /*

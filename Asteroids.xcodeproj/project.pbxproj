@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		073DB5621CFA9AB90086A199 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 073DB5601CFA9AB90086A199 /* Bullet.cpp */; };
+		073DB5641CFAA1020086A199 /* Bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 073DB5631CFAA1020086A199 /* Bullet.png */; };
 		073F8BF31CF14D6100D127F9 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 073F8BF21CF14D6100D127F9 /* ResourcePath.mm */; };
 		073F8BF61CF14D6100D127F9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 073F8BF51CF14D6100D127F9 /* main.cpp */; };
 		073F8BFD1CF14D6100D127F9 /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 073F8BFC1CF14D6100D127F9 /* sansation.ttf */; };
@@ -21,6 +23,9 @@
 
 /* Begin PBXFileReference section */
 		073DB55E1CFA7E830086A199 /* entity_t.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = entity_t.hpp; sourceTree = "<group>"; };
+		073DB5601CFA9AB90086A199 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
+		073DB5611CFA9AB90086A199 /* Bullet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bullet.hpp; sourceTree = "<group>"; };
+		073DB5631CFAA1020086A199 /* Bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bullet.png; sourceTree = "<group>"; };
 		073F8BED1CF14D6100D127F9 /* Asteroids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Asteroids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		073F8BF11CF14D6100D127F9 /* Asteroids-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Asteroids-Info.plist"; sourceTree = "<group>"; };
 		073F8BF21CF14D6100D127F9 /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
@@ -35,6 +40,7 @@
 		074A0AC21CF75D8900887B77 /* Asteroid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Asteroid.cpp; sourceTree = "<group>"; };
 		074A0AC31CF75D8900887B77 /* Asteroid.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Asteroid.hpp; sourceTree = "<group>"; };
 		075EA26F1CF3FDD800EB7605 /* asteroidShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroidShip.png; sourceTree = "<group>"; };
+		079B91121CFBFE190074180F /* entity_state_t.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = entity_state_t.hpp; sourceTree = "<group>"; };
 		07D17A481CF7A65B000AC6DE /* asteroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroid.png; sourceTree = "<group>"; };
 		07D32A691CF90E6B003AA79E /* game_state_t.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = game_state_t.hpp; sourceTree = "<group>"; };
 		07D32A6D1CF927BF003AA79E /* asteroidShipMoving.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroidShipMoving.png; sourceTree = "<group>"; };
@@ -58,6 +64,7 @@
 			children = (
 				073DB55E1CFA7E830086A199 /* entity_t.hpp */,
 				07D32A691CF90E6B003AA79E /* game_state_t.hpp */,
+				079B91121CFBFE190074180F /* entity_state_t.hpp */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -104,6 +111,7 @@
 		073F8BF71CF14D6100D127F9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				073DB5631CFAA1020086A199 /* Bullet.png */,
 				07D32A6D1CF927BF003AA79E /* asteroidShipMoving.png */,
 				07D17A481CF7A65B000AC6DE /* asteroid.png */,
 				075EA26F1CF3FDD800EB7605 /* asteroidShip.png */,
@@ -120,6 +128,8 @@
 				073F8C0C1CF15D6D00D127F9 /* Player.hpp */,
 				074A0AC21CF75D8900887B77 /* Asteroid.cpp */,
 				074A0AC31CF75D8900887B77 /* Asteroid.hpp */,
+				073DB5601CFA9AB90086A199 /* Bullet.cpp */,
+				073DB5611CFA9AB90086A199 /* Bullet.hpp */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -192,6 +202,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				073DB5641CFAA1020086A199 /* Bullet.png in Resources */,
 				07D32A6E1CF927BF003AA79E /* asteroidShipMoving.png in Resources */,
 				075EA2701CF3FDD800EB7605 /* asteroidShip.png in Resources */,
 				073F8BFD1CF14D6100D127F9 /* sansation.ttf in Resources */,
@@ -224,6 +235,7 @@
 			files = (
 				073F8BF61CF14D6100D127F9 /* main.cpp in Sources */,
 				073F8C071CF14F7B00D127F9 /* Handler.cpp in Sources */,
+				073DB5621CFA9AB90086A199 /* Bullet.cpp in Sources */,
 				073F8BF31CF14D6100D127F9 /* ResourcePath.mm in Sources */,
 				07DEDB971CF530FE00C8384A /* InputHandler.cpp in Sources */,
 				074A0AC41CF75D8900887B77 /* Asteroid.cpp in Sources */,

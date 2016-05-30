@@ -10,23 +10,20 @@
 #include <iostream>
 #include <vector>
 #include "Asteroid.hpp"
+#include "entity_state_t.hpp"
 
-// this is not good programming practice but I'm too lazy to fix it
+// this is not good programming practice but I'm too lazy to fix it right now
 Handler::~Handler() {
     for(int i = 0; i < gameObjects.size(); i++) {
         delete gameObjects[i];
     }
 }
 
-void Handler::notify(char data, char otherData) {
+void Handler::notify(char data) {
     
     for(int i = 0; i < gameObjects.size(); i++) {
         
-        if(gameObjects.at(i)->notify(data, otherData)) {
-            gameObjects.at(i) = gameObjects.back();
-            gameObjects.pop_back();
-
-        }
+        gameObjects.at(i)->notify(data);
         
     }
     
@@ -62,7 +59,6 @@ void Handler::update(sf::RenderWindow &window, game_state_t gameState) {
         for(int i = 0; i < gameObjects.size(); i++) {
             
             gameObjects.at(i)->update(window);
-            collision(gameObjects.at(i));
             
         }
         
@@ -70,48 +66,42 @@ void Handler::update(sf::RenderWindow &window, game_state_t gameState) {
     
 }
 
-void Handler::collision(Entity *entityObject) {
+void Handler::cleanUp() {
+    
+    decltype(gameObjects.begin()) it;
+    
+    for(it = gameObjects.begin(); it != gameObjects.end(); it++) {
+        if((*it)->getEntityState() == DEAD) {
+            it = gameObjects.erase(it);
+            it--;
+        }
+    }
+    
+}
+
+void Handler::collision() {
     
     for(int i = 0; i < gameObjects.size(); i++) {
         
-        sf::FloatRect object(entityObject->sprite.getGlobalBounds());
-        sf::FloatRect object2(gameObjects.at(i)->sprite.getGlobalBounds());
-        
-        if(object.intersects(object2) && object2 != object && entityObject->getEntityType() != gameObjects.at(i)->getEntityType()) {
+        for(int j = 0; j < gameObjects.size(); j++) {
+
             
-            otherData |= collidedData;
+            Entity *entityObject = gameObjects[i];
+            Entity *entityObject2 = gameObjects[j];
             
-            if(gameObjects.at(i)->notify(0, otherData)) {
-                gameObjects.at(i) = gameObjects.back();
-                gameObjects.pop_back();
-            }
+            sf::IntRect object(entityObject->sprite.getGlobalBounds());
+            sf::IntRect object2(entityObject2->sprite.getGlobalBounds());
             
-            decltype(gameObjects)::iterator it = gameObjects.begin();
             
-            it = std::find(gameObjects.begin(), gameObjects.end(), entityObject);
-            
-            int position = 0;
-            
-            if(it != gameObjects.end()) {
-                position = std::distance(gameObjects.begin(), it);
-            }
-            if(entityObject->notify(0,  otherData)) {
-                gameObjects.at(position) = gameObjects.back();
-                gameObjects.pop_back();
+            if(object.intersects(object2) && entityObject != entityObject2) {
+                
+                entityObject->collision(entityObject2->getEntityType());
+                entityObject2->collision(entityObject->getEntityType());
                 
             }
+            
         }
         
     }
     
 }
-
-/*
- void Handler::listen(sf::RenderWindow &window) {
- for(int i = 0; i < listener.size(); i++) {
- 
- listener.at(i).listen(window);
- 
- }
- }
- */

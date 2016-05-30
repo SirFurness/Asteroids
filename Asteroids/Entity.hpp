@@ -11,7 +11,9 @@
 
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "entity_t.hpp"
+#include "entity_state_t.hpp"
 
 class Entity {
 protected:
@@ -20,6 +22,8 @@ protected:
     //int width, height;
     
     entity_t entityType;
+    
+    entity_state_t entityState;
     
     void death();
     
@@ -31,7 +35,11 @@ public:
     virtual void update(sf::RenderWindow &window) = 0;
     virtual void render(sf::RenderWindow &window) = 0;
     
-    virtual bool notify(char keyData, char &otherData) = 0;
+    virtual void notify(char keyData) = 0;
+    
+    virtual void collision(entity_t type) = 0;
+    
+    virtual ~Entity() {};
     
     int getX() {return x;}
     int getY() {return y;}
@@ -46,7 +54,10 @@ public:
     void setEntityType(entity_t entityType) {this->entityType = entityType;}
     entity_t getEntityType() {return entityType;}
     
-    Entity(int x, int y, entity_t entityType) : x(x), y(y), entityType(entityType) {}
+    void setEntityState(entity_state_t entityState) {this->entityState = entityState;}
+    entity_state_t getEntityState() {return entityState;}
+    
+    Entity(int x, int y, entity_t entityType, entity_state_t entityState) : x(x), y(y), entityType(entityType), entityState(entityState) {}
     
 };
 

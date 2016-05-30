@@ -26,12 +26,16 @@ private:
     unsigned isInvincible = 1<<7, collidedData = 1<<6;
 public:
     
-    Asteroid(int x, int y, entity_t entityType) : Entity(x, y, entityType) {}
+    Asteroid(int x, int y, entity_t entityType, entity_state_t entityState) : Entity(x, y, entityType, entityState) {}
+    ~Asteroid() {}
     
-    bool notify(char keyData, char &otherData);
+    void notify(char keyData);
     void init(sf::RenderWindow &window);
     void update(sf::RenderWindow &window);
     void render(sf::RenderWindow &window);
+    void collision(entity_t type);
+    
+    void death();
     
 };
 

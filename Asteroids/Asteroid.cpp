@@ -26,7 +26,6 @@ void Asteroid::init(RenderWindow &window) {
     
     acceleration = dist(mt);
     
-    // loads the asteroid image
     if(!texture.loadFromFile(resourcePath()+"asteroid.png")) {
         cout << "Couldn't load asteroid image!" << endl;
         return EXIT_FAILURE;
@@ -42,7 +41,21 @@ void Asteroid::init(RenderWindow &window) {
     
 }
 
-// just moves the asteroid and makes it wrap around
+void Asteroid::death() {
+    entityState = DEAD;
+}
+
+void Asteroid::collision(entity_t type) {
+    
+    if(type == PLAYER) {
+        death();
+    }
+    else if(type == BULLET) {
+        death();
+    }
+    
+}
+
 void Asteroid::update(RenderWindow &window) {
     sprite.move(deltaX, deltaY);
     
@@ -68,19 +81,7 @@ void Asteroid::render(RenderWindow &window) {
     window.draw(sprite);
 }
 
-bool Asteroid::notify(char keyData, char &otherData) {
-    bool shouldKill = true;
+void Asteroid::notify(char keyData) {
     
-    if((otherData & isInvincible) == isInvincible) {
-        shouldKill = false;
-    }
-    
-    if((otherData & collidedData) == collidedData && shouldKill == true) {
-        // this means the asteroid will be destroyed
-        return true;
-    }
-    
-    // this means that the asteroid should not be destroyed
-    return false;
     
 }
