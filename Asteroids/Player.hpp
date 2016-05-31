@@ -55,15 +55,12 @@ private:
     bool everyotherMove = false, flickerSpeedMove = 2, isFlickeringMove = true, drawMove = false;
     int framesPassedMove = 0;
     
-    // keeps track of whether the player is moving up or not
     bool movingUp = false;
     
     void collided();
     
-    // handles the flickering or the movement image
     void movementFrames();
-    
-    // handlers the sprite flickering when invincible
+
     void invincibilityFrames();
     
 public:
@@ -80,6 +77,8 @@ public:
     void move(sf::RenderWindow &window);
     
     void notify(char keyData);
+    
+    bool isFlickering();
 };
 
 #endif /* Player_hpp */

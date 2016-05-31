@@ -18,6 +18,9 @@
 
 
 class Handler {
+private:
+    // I love the name of this member function
+    bool isCollidingWithInvinciblePlayer(Entity *entityObject, Entity *entityObject2);
 public:
     
     std::vector<Entity*> gameObjects;

@@ -212,6 +212,10 @@ void Player::death() {
      */
 }
 
+bool Player::isFlickering() {
+    return isFlickeringInv;
+}
+
 /*
  void Player::followMouse(RenderWindow &window) {
  

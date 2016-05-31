@@ -11,6 +11,7 @@
 #include <vector>
 #include "Asteroid.hpp"
 #include "entity_state_t.hpp"
+#include "Player.hpp"
 
 // this is not good programming practice but I'm too lazy to fix it right now
 Handler::~Handler() {
@@ -79,12 +80,29 @@ void Handler::cleanUp() {
     
 }
 
+bool Handler::isCollidingWithInvinciblePlayer(Entity *entityObject, Entity *entityObject2) {
+    
+    Player *playerObj = dynamic_cast<Player*>(entityObject);
+    Player *playerObj2 = dynamic_cast<Player*>(entityObject2);
+    
+    if(playerObj != NULL && playerObj->isFlickering()) {
+        return true;
+    }
+    
+    if(playerObj2 != NULL && playerObj2->isFlickering()) {
+        return true;
+    }
+    
+    return false;
+    
+}
+
 void Handler::collision() {
     
     for(int i = 0; i < gameObjects.size(); i++) {
         
         for(int j = 0; j < gameObjects.size(); j++) {
-
+            
             
             Entity *entityObject = gameObjects[i];
             Entity *entityObject2 = gameObjects[j];
@@ -95,9 +113,10 @@ void Handler::collision() {
             
             if(object.intersects(object2) && entityObject != entityObject2) {
                 
-                entityObject->collision(entityObject2->getEntityType());
-                entityObject2->collision(entityObject->getEntityType());
-                
+                if(!isCollidingWithInvinciblePlayer(entityObject, entityObject2)) {
+                    entityObject->collision(entityObject2->getEntityType());
+                    entityObject2->collision(entityObject->getEntityType());
+                }
             }
             
         }
