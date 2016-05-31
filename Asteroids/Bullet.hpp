@@ -2,8 +2,8 @@
 //  Bullet.hpp
 //  Asteroids
 //
-//  Created by Eric Paul on 5/28/16.
-//  Copyright © 2016 Eric Paul. All rights reserved.
+//  Created by Eric on 5/28/16.
+//  Copyright © 2016 Eric. All rights reserved.
 //
 
 #include "Entity.hpp"
@@ -19,7 +19,7 @@ class Bullet : public Entity {
     
 public:
     
-    Bullet(int x, int y, entity_t entityType, entity_state_t entityState) : Entity(x, y, entityType, entityState) {}
+    Bullet(int x, int y, entity_t entityType, entity_state_t entityState, double deltaX, double deltaY, int speed) : Entity(x, y, entityType, entityState) {}
     ~Bullet();
     
     void notify(char keyData);

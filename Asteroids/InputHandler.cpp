@@ -2,8 +2,8 @@
 //  InputHandler.cpp
 //  Asteroids
 //
-//  Created by Eric Paul on 5/24/16.
-//  Copyright © 2016 Eric Paul. All rights reserved.
+//  Created by Eric on 5/24/16.
+//  Copyright © 2016 Eric. All rights reserved.
 //
 
 #include "InputHandler.hpp"
