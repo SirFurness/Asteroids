@@ -12,6 +12,7 @@
 #include "entity_t.hpp"
 #include "Bullet.hpp"
 #include "entity_state_t.hpp"
+#include <memory>
 
 // initiates the game and has the game loop
 
@@ -29,12 +30,17 @@ int main()
     
     InputHandler inputHandler;
     
-    Player *player = new Player(WIDTH/2, HEIGHT/2, 3, PLAYER, ALIVE);
+    //std::shared_ptr<Entity> player = std::make_shared<Player>(new Player(WIDTH/2, HEIGHT/2, 3, PLAYER, ALIVE));
     
+    std::shared_ptr<Entity> player(new Player(WIDTH/2, HEIGHT/2, 3, PLAYER, ALIVE));
+    
+    std::shared_ptr<Entity> asteroid(new Asteroid(100, 200, ASTEROID, ALIVE));
+    
+    std::shared_ptr<Entity> asteroid2(new Asteroid(200, 100, ASTEROID, ALIVE));
     
     handler.gameObjects.push_back(player);
-    handler.gameObjects.push_back(new Asteroid(100, 200, ASTEROID, ALIVE));
-    handler.gameObjects.push_back(new Asteroid(200, 100, ASTEROID, ALIVE));
+    handler.gameObjects.push_back(asteroid);
+    handler.gameObjects.push_back(asteroid2);
     //handler.gameObjects.push_back(new Bullet(200, 200, BULLET));
     
     handler.init(window);
@@ -55,7 +61,7 @@ int main()
         }
         handler.update(window, gameState);
         
-        handler.collision();
+        handler.collision(window);
         
         handler.cleanUp();
         

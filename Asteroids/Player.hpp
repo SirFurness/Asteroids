@@ -72,13 +72,14 @@ public:
     void render(sf::RenderWindow &window);
     void collision(entity_t type);
     
+    
+    bool isFlickering();
+    
     void death();
     
     void move(sf::RenderWindow &window);
     
     void notify(char keyData);
-    
-    bool isFlickering();
 };
 
 #endif /* Player_hpp */

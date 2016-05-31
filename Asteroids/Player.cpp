@@ -199,8 +199,7 @@ double Player::degreesToRadians(double degrees) {
 }
 
 void Player::death() {
-    
-    /*
+
     sprite.setPosition(WIDTH/2, HEIGHT/2);
     
     deltaX = 0;
@@ -209,7 +208,6 @@ void Player::death() {
     waitUntilReleased = true;
     
     framesPassedInv = 0;
-     */
 }
 
 bool Player::isFlickering() {

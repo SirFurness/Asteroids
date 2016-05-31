@@ -12,13 +12,16 @@
 #include "Asteroid.hpp"
 #include "entity_state_t.hpp"
 #include "Player.hpp"
+#include <memory>
 
 // this is not good programming practice but I'm too lazy to fix it right now
+/*
 Handler::~Handler() {
     for(int i = 0; i < gameObjects.size(); i++) {
         delete gameObjects[i];
     }
 }
+ */
 
 void Handler::notify(char data) {
     
@@ -80,16 +83,9 @@ void Handler::cleanUp() {
     
 }
 
-bool Handler::isCollidingWithInvinciblePlayer(Entity *entityObject, Entity *entityObject2) {
+bool Handler::isCollidingWithInvinciblePlayer(std::shared_ptr<Entity> entityObject, std::shared_ptr<Entity> entityObject2) {
     
-    Player *playerObj = dynamic_cast<Player*>(entityObject);
-    Player *playerObj2 = dynamic_cast<Player*>(entityObject2);
-    
-    if(playerObj != NULL && playerObj->isFlickering()) {
-        return true;
-    }
-    
-    if(playerObj2 != NULL && playerObj2->isFlickering()) {
+    if(entityObject->isFlickering() || entityObject2->isFlickering()) {
         return true;
     }
     
@@ -97,15 +93,15 @@ bool Handler::isCollidingWithInvinciblePlayer(Entity *entityObject, Entity *enti
     
 }
 
-void Handler::collision() {
+void Handler::collision(sf::RenderWindow &window) {
     
     for(int i = 0; i < gameObjects.size(); i++) {
         
         for(int j = 0; j < gameObjects.size(); j++) {
             
             
-            Entity *entityObject = gameObjects[i];
-            Entity *entityObject2 = gameObjects[j];
+            auto entityObject = gameObjects[i];
+            auto entityObject2 = gameObjects[j];
             
             sf::IntRect object(entityObject->sprite.getGlobalBounds());
             sf::IntRect object2(entityObject2->sprite.getGlobalBounds());
@@ -116,6 +112,11 @@ void Handler::collision() {
                 if(!isCollidingWithInvinciblePlayer(entityObject, entityObject2)) {
                     entityObject->collision(entityObject2->getEntityType());
                     entityObject2->collision(entityObject->getEntityType());
+                    if(entityObject->getEntityType() == PLAYER) {
+                        std::shared_ptr<Entity> asteroid(new Asteroid(100, 200, ASTEROID, ALIVE));
+                        gameObjects.push_back(asteroid);
+                        gameObjects.at((gameObjects.size()-1))->init(window);
+                    }
                 }
             }
             

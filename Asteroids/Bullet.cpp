@@ -28,6 +28,10 @@ void Bullet::init(sf::RenderWindow &window) {
     
 }
 
+bool Bullet::isFlickering() {
+    return false;
+}
+
 void Bullet::update(sf::RenderWindow &window) {
     sprite.move(1, 1);
 }

@@ -28,6 +28,8 @@ public:
     void init(sf::RenderWindow &window);
     void collision(entity_t type);
     
+    bool isFlickering();
+    
     void death();
     
 };
