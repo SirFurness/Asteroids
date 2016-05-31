@@ -19,7 +19,7 @@ private:
     double acceleration = 0.3, rotation = 0, deltaX, deltaY, friction = 0.98, maxSpeed = 15;
     
     int health;
-    unsigned char keyData = 0, upData = 1<<7, downData = 1<<6, leftData = 1<<5, rightData = 1<<4, pressedData = 1<<3, releasedData = 1<<2, upReleased = 1<<1;
+    unsigned char keyData = 0, upData = 1<<7, spaceData = 1<<6, leftData = 1<<5, rightData = 1<<4, pressedData = 1<<3, releasedData = 1<<2, upReleased = 1<<1;
     
     unsigned char otherData = 0, isInvincible = 1<<7, collidedData = 1<<6;
     
@@ -53,9 +53,13 @@ private:
     
     // these do the exact same thing as the variables above except for the accerleration image and not the player
     bool everyotherMove = false, flickerSpeedMove = 2, isFlickeringMove = true, drawMove = false;
-    int framesPassedMove = 0;
+    int framesPassedMove = 20;
+    
+    int shootDelay = 0;
     
     bool movingUp = false;
+    
+    bool spawnBullet = false;
     
     void collided();
     
@@ -76,6 +80,8 @@ public:
     bool isFlickering();
     
     void death();
+    
+    bool shouldSpawnBullet(double &rotation);
     
     void move(sf::RenderWindow &window);
     

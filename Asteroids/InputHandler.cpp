@@ -38,6 +38,14 @@ char InputHandler::createData(sf::Event event) {
                 break;
         }
         
+        switch(event.key.code) {
+            case sf::Keyboard::Space:
+                data |= spaceData;
+                break;
+            default:
+                break;
+        }
+        
     }
     
     if(event.type == sf::Event::KeyReleased) {
@@ -62,6 +70,14 @@ char InputHandler::createData(sf::Event event) {
             case sf::Keyboard::Right:
             case sf::Keyboard::D:
                 data &= ~rightData;
+                break;
+            default:
+                break;
+        }
+        
+        switch(event.key.code) {
+            case sf::Keyboard::Space:
+                data &= ~spaceData;
                 break;
             default:
                 break;

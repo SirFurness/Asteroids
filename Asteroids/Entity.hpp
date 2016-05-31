@@ -37,6 +37,7 @@ public:
     
     // yes this shouldn't be in the base class since it's only needed in the Player class but I don't care
     virtual bool isFlickering() = 0;
+    virtual bool shouldSpawnBullet(double &rotation) = 0;
     
     virtual void notify(char keyData) = 0;
     

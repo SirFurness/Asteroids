@@ -10,17 +10,18 @@
 #include <iostream>
 #include <vector>
 #include "Asteroid.hpp"
+#include "Bullet.hpp"
 #include "entity_state_t.hpp"
 #include "Player.hpp"
 #include <memory>
 
 // this is not good programming practice but I'm too lazy to fix it right now
 /*
-Handler::~Handler() {
-    for(int i = 0; i < gameObjects.size(); i++) {
-        delete gameObjects[i];
-    }
-}
+ Handler::~Handler() {
+ for(int i = 0; i < gameObjects.size(); i++) {
+ delete gameObjects[i];
+ }
+ }
  */
 
 void Handler::notify(char data) {
@@ -63,7 +64,9 @@ void Handler::update(sf::RenderWindow &window, game_state_t gameState) {
         for(int i = 0; i < gameObjects.size(); i++) {
             
             gameObjects.at(i)->update(window);
-            
+            if(gameObjects.at(i)->getEntityType() == PLAYER) {
+                spawnBullet(gameObjects.at(i), window);
+            }
         }
         
     }
@@ -79,6 +82,18 @@ void Handler::cleanUp() {
             it = gameObjects.erase(it);
             it--;
         }
+    }
+    
+}
+
+void Handler::spawnBullet(std::shared_ptr<Entity> &player, sf::RenderWindow &window) {
+    
+    double rotation = 0.0;
+    
+    if(player->shouldSpawnBullet(rotation)) {
+        std::shared_ptr<Bullet> bullet(new Bullet(player->sprite.getPosition().x, player->sprite.getPosition().y, BULLET, ALIVE, rotation));
+        bullet->init(window);
+        gameObjects.push_back(bullet);
     }
     
 }
@@ -112,11 +127,13 @@ void Handler::collision(sf::RenderWindow &window) {
                 if(!isCollidingWithInvinciblePlayer(entityObject, entityObject2)) {
                     entityObject->collision(entityObject2->getEntityType());
                     entityObject2->collision(entityObject->getEntityType());
-                    if(entityObject->getEntityType() == PLAYER) {
-                        std::shared_ptr<Entity> asteroid(new Asteroid(100, 200, ASTEROID, ALIVE));
-                        gameObjects.push_back(asteroid);
-                        gameObjects.at((gameObjects.size()-1))->init(window);
-                    }
+                    /*
+                     if(entityObject->getEntityType() == PLAYER) {
+                     std::shared_ptr<Entity> asteroid(new Asteroid(100, 200, ASTEROID, ALIVE));
+                     gameObjects.push_back(asteroid);
+                     gameObjects.at((gameObjects.size()-1))->init(window);
+                     }
+                     */
                 }
             }
             

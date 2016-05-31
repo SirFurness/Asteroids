@@ -55,7 +55,7 @@ void Player::collision(entity_t type) {
     }
     
     if(type == BULLET) {
-        death();
+       // death();
     }
     
 }
@@ -125,6 +125,11 @@ void Player::movementFrames() {
 }
 
 void Player::move(RenderWindow &window) {
+    
+    if(!(shootDelay <= 0)) {
+        --shootDelay;
+    }
+    
     if(!waitUntilReleased) {
         if((keyData & upData) == upData) {
             
@@ -182,6 +187,10 @@ void Player::move(RenderWindow &window) {
         }
         
         sprite.setPosition(newPos);
+        
+        if(((keyData & spaceData) == spaceData) && shootDelay == 0) {
+            spawnBullet = true;
+        }
     }
     else if((keyData & upReleased) == upReleased) {
         waitUntilReleased = false;
@@ -191,6 +200,19 @@ void Player::move(RenderWindow &window) {
 
 void Player::update(RenderWindow &window) {
     move(window);
+    
+}
+
+bool Player::shouldSpawnBullet(double &changeRotation) {
+    
+    if(spawnBullet) {
+        changeRotation = sprite.getRotation();
+        spawnBullet = false;
+        shootDelay = 30;
+        return true;
+    }
+    
+    return false;
     
 }
 

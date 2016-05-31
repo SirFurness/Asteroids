@@ -14,6 +14,7 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include "Entity.hpp"
+#include "Player.hpp"
 #include "game_state_t.hpp"
 
 
@@ -22,6 +23,7 @@ private:
     // I love the name of this member function
     bool hitPlayer = false;
     bool isCollidingWithInvinciblePlayer(std::shared_ptr<Entity> entityObject, std::shared_ptr<Entity> entityObject2);
+    void spawnBullet(std::shared_ptr<Entity> &player, sf::RenderWindow &window);
 public:
     
     std::vector<std::shared_ptr<Entity>> gameObjects;

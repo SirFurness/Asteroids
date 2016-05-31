@@ -15,12 +15,26 @@
 
 class Bullet : public Entity {
     
+    const int WIDTH = 800, HEIGHT = 600;
+    
+    double rotation, deltaX, deltaY;
+    
+    double speed = 3;
+    
+    int frameLife = 1*(60), framesPassed = 0;
+    
+    double degreesToRadians(double degrees);
+    
     sf::Texture texture;
     
 public:
     
-    Bullet(int x, int y, entity_t entityType, entity_state_t entityState, double deltaX, double deltaY, int speed) : Entity(x, y, entityType, entityState) {}
+    Bullet(int x, int y, entity_t entityType, entity_state_t entityState, double rotation) : Entity(x, y, entityType, entityState), rotation(rotation) {}
     ~Bullet();
+    
+    void shouldDie();
+    
+    bool shouldSpawnBullet(double &rotation);
     
     void notify(char keyData);
     void update(sf::RenderWindow &window);
