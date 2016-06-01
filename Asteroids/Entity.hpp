@@ -35,10 +35,6 @@ public:
     virtual void update(sf::RenderWindow &window) = 0;
     virtual void render(sf::RenderWindow &window) = 0;
     
-    // yes this shouldn't be in the base class since it's only needed in the Player class but I don't care
-    virtual bool isFlickering() = 0;
-    virtual bool shouldSpawnBullet(double &rotation) = 0;
-    
     virtual void notify(char keyData) = 0;
     
     virtual void collision(entity_t type) = 0;

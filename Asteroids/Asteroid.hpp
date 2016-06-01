@@ -35,10 +35,6 @@ public:
     void render(sf::RenderWindow &window);
     void collision(entity_t type);
     
-    bool shouldSpawnBullet(double &rotation);
-    
-    bool isFlickering();
-    
     void death();
     
 };

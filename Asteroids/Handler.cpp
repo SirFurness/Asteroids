@@ -65,7 +65,7 @@ void Handler::update(sf::RenderWindow &window, game_state_t gameState) {
             
             gameObjects.at(i)->update(window);
             if(gameObjects.at(i)->getEntityType() == PLAYER) {
-                spawnBullet(gameObjects.at(i), window);
+                spawnBullet(std::static_pointer_cast<Player>(gameObjects.at(i)), window);
             }
         }
         
@@ -86,7 +86,7 @@ void Handler::cleanUp() {
     
 }
 
-void Handler::spawnBullet(std::shared_ptr<Entity> &player, sf::RenderWindow &window) {
+void Handler::spawnBullet(std::shared_ptr<Player> player, sf::RenderWindow &window) {
     
     double rotation = 0.0;
     
@@ -100,8 +100,19 @@ void Handler::spawnBullet(std::shared_ptr<Entity> &player, sf::RenderWindow &win
 
 bool Handler::isCollidingWithInvinciblePlayer(std::shared_ptr<Entity> entityObject, std::shared_ptr<Entity> entityObject2) {
     
-    if(entityObject->isFlickering() || entityObject2->isFlickering()) {
-        return true;
+    if(entityObject->getEntityType() == PLAYER) {
+        //std::cout << "found player" << std::endl;
+        if((std::static_pointer_cast<Player>(entityObject))->isFlickering()) {
+            //std::cout << "is flickering" << std::endl;
+            return true;
+        }
+    }
+    else if(entityObject->getEntityType() == PLAYER) {
+        //std::cout << "found player" << std::endl;
+        if((std::static_pointer_cast<Player>(entityObject2))->isFlickering()) {
+            //std::cout << "is flickering" << std::endl;
+            return true;
+        }
     }
     
     return false;
@@ -124,7 +135,7 @@ void Handler::collision(sf::RenderWindow &window) {
             
             if(object.intersects(object2) && entityObject != entityObject2) {
                 
-                if(!isCollidingWithInvinciblePlayer(entityObject, entityObject2)) {
+                if(!(isCollidingWithInvinciblePlayer(entityObject, entityObject2))) {
                     entityObject->collision(entityObject2->getEntityType());
                     entityObject2->collision(entityObject->getEntityType());
                     /*

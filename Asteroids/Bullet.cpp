@@ -32,14 +32,6 @@ void Bullet::init(sf::RenderWindow &window) {
     
 }
 
-bool Bullet::isFlickering() {
-    return false;
-}
-
-bool Bullet::shouldSpawnBullet(double &rotation) {
-    return false;
-}
-
 void Bullet::update(sf::RenderWindow &window) {
     sprite.move(deltaX*speed, deltaY*speed);
     

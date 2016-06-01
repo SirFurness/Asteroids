@@ -21,7 +21,7 @@ class Bullet : public Entity {
     
     double speed = 3;
     
-    int frameLife = 1*(60), framesPassed = 0;
+    int frameLife = 60, framesPassed = 0;
     
     double degreesToRadians(double degrees);
     
@@ -34,15 +34,11 @@ public:
     
     void shouldDie();
     
-    bool shouldSpawnBullet(double &rotation);
-    
     void notify(char keyData);
     void update(sf::RenderWindow &window);
     void render(sf::RenderWindow &window);
     void init(sf::RenderWindow &window);
     void collision(entity_t type);
-    
-    bool isFlickering();
     
     void death();
     

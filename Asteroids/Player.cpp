@@ -55,7 +55,7 @@ void Player::collision(entity_t type) {
     }
     
     if(type == BULLET) {
-       // death();
+       //death();
     }
     
 }
@@ -126,7 +126,7 @@ void Player::movementFrames() {
 
 void Player::move(RenderWindow &window) {
     
-    if(!(shootDelay <= 0)) {
+    if(shootDelay > 0) {
         --shootDelay;
     }
     
@@ -188,7 +188,7 @@ void Player::move(RenderWindow &window) {
         
         sprite.setPosition(newPos);
         
-        if(((keyData & spaceData) == spaceData) && shootDelay == 0) {
+        if(((keyData & spaceData) == spaceData) && shootDelay == 0 ) {
             spawnBullet = true;
         }
     }

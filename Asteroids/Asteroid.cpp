@@ -56,14 +56,6 @@ void Asteroid::collision(entity_t type) {
     
 }
 
-bool Asteroid::shouldSpawnBullet(double &rotation) {
-    return false;
-}
-
-bool Asteroid::isFlickering() {
-    return false;
-}
-
 void Asteroid::update(RenderWindow &window) {
     sprite.move(deltaX, deltaY);
     
