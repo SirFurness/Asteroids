@@ -54,8 +54,8 @@ void Player::collision(entity_t type) {
         death();
     }
     
-    if(type == BULLET) {
-       //death();
+    if(type == ENEMY_BULLET) {
+       death();
     }
     
 }

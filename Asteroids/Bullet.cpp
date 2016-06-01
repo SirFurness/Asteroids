@@ -27,8 +27,10 @@ void Bullet::init(sf::RenderWindow &window) {
     sprite.setOrigin(texture.getSize().x/2, texture.getSize().y/2);
     sprite.setScale(2, 2);
     
-    deltaX = (sin(degreesToRadians(rotation)))*speed;
-    deltaY = (-1 * (cos(degreesToRadians(rotation))))*speed;
+    deltaX = (sin(degreesToRadians(rotation+0.5)))*speed;
+    deltaY = (-1 * (cos(degreesToRadians(rotation+0.5))))*speed;
+    
+    //sprite.move(deltaX, deltaY);
     
 }
 

@@ -91,7 +91,7 @@ void Handler::spawnBullet(std::shared_ptr<Player> player, sf::RenderWindow &wind
     double rotation = 0.0;
     
     if(player->shouldSpawnBullet(rotation)) {
-        std::shared_ptr<Bullet> bullet(new Bullet(player->sprite.getPosition().x, player->sprite.getPosition().y, BULLET, ALIVE, rotation));
+        std::shared_ptr<Bullet> bullet(new Bullet(player->sprite.getPosition().x, player->sprite.getPosition().y, PLAYER_BULLET, ALIVE, rotation));
         bullet->init(window);
         gameObjects.push_back(bullet);
     }

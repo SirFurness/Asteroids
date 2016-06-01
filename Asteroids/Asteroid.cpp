@@ -50,7 +50,7 @@ void Asteroid::collision(entity_t type) {
     if(type == PLAYER) {
         death();
     }
-    else if(type == BULLET) {
+    else if(type == PLAYER_BULLET || type == ENEMY_BULLET) {
         death();
     }
     
