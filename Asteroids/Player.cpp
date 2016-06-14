@@ -55,18 +55,12 @@ void Player::collision(entity_t type) {
         case EASY_ATTACKER:
         case ENEMY_BULLET:
         case ASTEROID:
-            death();
+            if(!isFlickering()) {
+                death();
+            }
             break;
         default:
             break;
-    }
-    
-    if(type == ASTEROID) {
-        death();
-    }
-    
-    if(type == ENEMY_BULLET) {
-        death();
     }
     
 }
@@ -202,7 +196,7 @@ void Player::move(RenderWindow &window) {
     
     sprite.setPosition(newPos);
     
-    if(((keyData & spaceData) == spaceData)/* && shoot.shouldSpawnBullet()*/) {
+    if(((keyData & spaceData) == spaceData) && shoot.shouldSpawnBullet()) {
         spawnBullet = true;
     }
     else {
@@ -219,10 +213,10 @@ void Player::update(RenderWindow &window) {
 
 bool Player::shouldSpawnBullet(double &changeRotation) {
     
-
+    
     changeRotation = sprite.getRotation();
     
-    return shoot.shouldSpawnBullet() && spawnBullet;
+    return spawnBullet;
     
     
 }
@@ -233,14 +227,22 @@ double Player::degreesToRadians(double degrees) {
 
 void Player::death() {
     
-    sprite.setPosition(WIDTH/2, HEIGHT/2);
+    health -= 1;
     
-    deltaX = 0;
-    deltaY = 0;
-    
-    waitUntilReleased = true;
-    
-    framesPassedInv = 0;
+    if(health == 0) {
+        entityState = DEAD;
+        
+    }
+    else {
+        sprite.setPosition(WIDTH/2, HEIGHT/2);
+        
+        deltaX = 0;
+        deltaY = 0;
+        
+        waitUntilReleased = true;
+        
+        framesPassedInv = 0;
+    }
 }
 
 bool Player::isFlickering() {

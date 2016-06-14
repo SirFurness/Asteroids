@@ -40,12 +40,12 @@ int main()
     
     std::shared_ptr<Entity> asteroid2(new Asteroid(200, 100, ASTEROID, ALIVE));
     
-    std::shared_ptr<Entity> easyAttacker(new EasyAttacker(10, 10, EASY_ATTACKER, ALIVE));
+    //std::shared_ptr<Entity> easyAttacker(new EasyAttacker(10, 10, EASY_ATTACKER, ALIVE));
     
     handler.gameObjects.push_back(player);
     handler.gameObjects.push_back(asteroid);
     handler.gameObjects.push_back(asteroid2);
-    handler.gameObjects.push_back(easyAttacker);
+    //handler.gameObjects.push_back(easyAttacker);
     
     handler.init(window);
     
@@ -67,7 +67,7 @@ int main()
         
         handler.collision(window);
         
-        handler.cleanUp();
+        handler.cleanUp(window, gameState);
         
         window.clear();
         

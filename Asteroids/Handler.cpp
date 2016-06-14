@@ -15,15 +15,6 @@
 #include "Player.hpp"
 #include <memory>
 
-// this is not good programming practice but I'm too lazy to fix it right now
-/*
- Handler::~Handler() {
- for(int i = 0; i < gameObjects.size(); i++) {
- delete gameObjects[i];
- }
- }
- */
-
 void Handler::notify(char data) {
     
     for(int i = 0; i < gameObjects.size(); i++) {
@@ -61,8 +52,14 @@ void Handler::update(sf::RenderWindow &window, game_state_t gameState) {
     
     if(gameState == PLAYING) {
         
+        for(int i = 0; i < toBeAdded.size(); i++) {
+            gameObjects.push_back(toBeAdded.at(i));
+        }
+        
+        toBeAdded.clear();
+        
         for(int i = 0; i < gameObjects.size(); i++) {
-
+            
             
             gameObjects.at(i)->update(window);
             switch(gameObjects.at(i)->getEntityType()) {
@@ -71,6 +68,9 @@ void Handler::update(sf::RenderWindow &window, game_state_t gameState) {
                     break;
                 case EASY_ATTACKER:
                     easyAttackerSpecifics(std::static_pointer_cast<EasyAttacker>(gameObjects.at(i)), window);
+                    break;
+                case ASTEROID:
+                    asteroidSpecifics(std::static_pointer_cast<Asteroid>(gameObjects.at(i)), window);
                     break;
                 default:
                     break;
@@ -83,15 +83,60 @@ void Handler::update(sf::RenderWindow &window, game_state_t gameState) {
     
 }
 
-void Handler::cleanUp() {
+void Handler::cleanUp(sf::RenderWindow &window, game_state_t gameState) {
     
     decltype(gameObjects.begin()) it;
     
     for(it = gameObjects.begin(); it != gameObjects.end(); it++) {
         if((*it)->getEntityState() == DEAD) {
+            
+            switch((*it)->getEntityType()) {
+                case ASTEROID:
+                    splitAsteroid(std::static_pointer_cast<Asteroid>(*it), window);
+                    break;
+                case PLAYER:
+                    gameState = LOSE;
+                    break;
+                default:
+                    break;
+            }
+            
+            
             it = gameObjects.erase(it);
             it--;
         }
+    }
+    
+}
+
+void Handler::splitAsteroid(std::shared_ptr<Asteroid> asteroid, sf::RenderWindow &window) {
+    
+    if(asteroid->splitTimes < 2) {
+        
+        std::shared_ptr<Asteroid> asteroid1, asteroid2;
+        asteroid->asteroidSplit(asteroid1, asteroid2);
+        
+        asteroid1->init(window);
+        asteroid2->init(window);
+        
+        toBeAdded.push_back(std::static_pointer_cast<Entity>(asteroid1));
+        toBeAdded.push_back(std::static_pointer_cast<Entity>(asteroid2));
+    }
+    
+}
+
+void Handler::asteroidSpecifics(std::shared_ptr<Asteroid> asteroid, sf::RenderWindow &window) {
+    
+    for(int i = 0; i < gameObjects.size(); i++) {
+        
+        if(gameObjects.at(i)->getEntityType() == PLAYER) {
+            
+            std::shared_ptr<Player> player(std::static_pointer_cast<Player>(gameObjects.at(i)));
+            
+            asteroid->isInvincible = player->isFlickering();
+            
+        }
+        
     }
     
 }
@@ -155,13 +200,6 @@ void Handler::collision(sf::RenderWindow &window) {
                 if(!(isCollidingWithInvinciblePlayer(entityObject, entityObject2))) {
                     entityObject->collision(entityObject2->getEntityType());
                     entityObject2->collision(entityObject->getEntityType());
-                    /*
-                     if(entityObject->getEntityType() == PLAYER) {
-                     std::shared_ptr<Entity> asteroid(new Asteroid(100, 200, ASTEROID, ALIVE));
-                     gameObjects.push_back(asteroid);
-                     gameObjects.at((gameObjects.size()-1))->init(window);
-                     }
-                     */
                 }
             }
             

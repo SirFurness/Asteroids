@@ -16,6 +16,7 @@
 #include "Entity.hpp"
 #include "Player.hpp"
 #include "EasyAttacker.hpp"
+#include "Asteroid.hpp"
 #include "game_state_t.hpp"
 
 
@@ -28,16 +29,19 @@ private:
     
     void playerSpecifics(std::shared_ptr<Player> player, sf::RenderWindow &window);
     void easyAttackerSpecifics(std::shared_ptr<EasyAttacker> easyAttacker, sf::RenderWindow &window);
+    void asteroidSpecifics(std::shared_ptr<Asteroid> asteroid, sf::RenderWindow &window);
+    void splitAsteroid(std::shared_ptr<Asteroid> asteroid, sf::RenderWindow &window);
 public:
     
     std::vector<std::shared_ptr<Entity>> gameObjects;
+    std::vector<std::shared_ptr<Entity>> toBeAdded;
     
     void collision(sf::RenderWindow &window);
     void notify(char data);
     void render(sf::RenderWindow &window, game_state_t gameState);
     void update(sf::RenderWindow &window, game_state_t gameState);
     void init(sf::RenderWindow &window);
-    void cleanUp();
+    void cleanUp(sf::RenderWindow &window, game_state_t gameState);
     
     void listen(sf::RenderWindow &window);
 };

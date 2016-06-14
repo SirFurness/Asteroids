@@ -22,6 +22,7 @@
 		07D17A491CF7A65B000AC6DE /* asteroid.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D17A481CF7A65B000AC6DE /* asteroid.png */; };
 		07D32A6E1CF927BF003AA79E /* asteroidShipMoving.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D32A6D1CF927BF003AA79E /* asteroidShipMoving.png */; };
 		07DEDB971CF530FE00C8384A /* InputHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07DEDB951CF530FE00C8384A /* InputHandler.cpp */; };
+		07EB107E1D106BC50084D678 /* asteroidSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 07EB107D1D106BC50084D678 /* asteroidSmall.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		07D32A6D1CF927BF003AA79E /* asteroidShipMoving.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroidShipMoving.png; sourceTree = "<group>"; };
 		07DEDB951CF530FE00C8384A /* InputHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputHandler.cpp; sourceTree = "<group>"; };
 		07DEDB961CF530FE00C8384A /* InputHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputHandler.hpp; sourceTree = "<group>"; };
+		07EB107D1D106BC50084D678 /* asteroidSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroidSmall.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 		073F8BF71CF14D6100D127F9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				07EB107D1D106BC50084D678 /* asteroidSmall.png */,
 				075EC0F01CFF946800229080 /* easyAttacker.png */,
 				073DB5631CFAA1020086A199 /* Bullet.png */,
 				07D32A6D1CF927BF003AA79E /* asteroidShipMoving.png */,
@@ -227,6 +230,7 @@
 				07D32A6E1CF927BF003AA79E /* asteroidShipMoving.png in Resources */,
 				075EA2701CF3FDD800EB7605 /* asteroidShip.png in Resources */,
 				073F8BFD1CF14D6100D127F9 /* sansation.ttf in Resources */,
+				07EB107E1D106BC50084D678 /* asteroidSmall.png in Resources */,
 				075EC0F11CFF946800229080 /* easyAttacker.png in Resources */,
 				07D17A491CF7A65B000AC6DE /* asteroid.png in Resources */,
 			);
