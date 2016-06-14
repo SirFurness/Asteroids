@@ -12,7 +12,9 @@
 #include "entity_t.hpp"
 #include "Bullet.hpp"
 #include "entity_state_t.hpp"
+#include "EasyAttacker.hpp"
 #include <memory>
+
 
 // initiates the game and has the game loop
 
@@ -38,10 +40,12 @@ int main()
     
     std::shared_ptr<Entity> asteroid2(new Asteroid(200, 100, ASTEROID, ALIVE));
     
+    std::shared_ptr<Entity> easyAttacker(new EasyAttacker(10, 10, EASY_ATTACKER, ALIVE));
+    
     handler.gameObjects.push_back(player);
     handler.gameObjects.push_back(asteroid);
     handler.gameObjects.push_back(asteroid2);
-    //handler.gameObjects.push_back(new Bullet(200, 200, BULLET));
+    handler.gameObjects.push_back(easyAttacker);
     
     handler.init(window);
     

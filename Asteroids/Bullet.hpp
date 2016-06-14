@@ -9,13 +9,12 @@
 #include "Entity.hpp"
 #include <SFML/Graphics.hpp>
 #include "entity_t.hpp"
+#include <iostream>
 
 #ifndef Bullet_hpp
 #define Bullet_hpp
 
 class Bullet : public Entity {
-    
-    const int WIDTH = 800, HEIGHT = 600;
     
     double rotation, deltaX, deltaY;
     
@@ -25,11 +24,14 @@ class Bullet : public Entity {
     
     double degreesToRadians(double degrees);
     
+    bool makeRotationRandom = false;
+    
     sf::Texture texture;
     
 public:
     
     Bullet(int x, int y, entity_t entityType, entity_state_t entityState, double rotation) : Entity(x, y, entityType, entityState), rotation(rotation) {}
+    Bullet(int x, int y, entity_t entityType, entity_state_t entityState) : Entity(x, y, entityType, entityState) {makeRotationRandom = true;}
     ~Bullet();
     
     void shouldDie();

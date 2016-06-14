@@ -15,7 +15,6 @@
 
 class Asteroid : public Entity {
 private:
-    const int WIDTH = 800, HEIGHT = 600;
     
     sf::Texture texture;
     

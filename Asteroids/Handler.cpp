@@ -62,11 +62,21 @@ void Handler::update(sf::RenderWindow &window, game_state_t gameState) {
     if(gameState == PLAYING) {
         
         for(int i = 0; i < gameObjects.size(); i++) {
+
             
             gameObjects.at(i)->update(window);
-            if(gameObjects.at(i)->getEntityType() == PLAYER) {
-                spawnBullet(std::static_pointer_cast<Player>(gameObjects.at(i)), window);
+            switch(gameObjects.at(i)->getEntityType()) {
+                case PLAYER:
+                    playerSpecifics(std::static_pointer_cast<Player>(gameObjects.at(i)), window);
+                    break;
+                case EASY_ATTACKER:
+                    easyAttackerSpecifics(std::static_pointer_cast<EasyAttacker>(gameObjects.at(i)), window);
+                    break;
+                default:
+                    break;
             }
+            
+            
         }
         
     }
@@ -86,7 +96,18 @@ void Handler::cleanUp() {
     
 }
 
-void Handler::spawnBullet(std::shared_ptr<Player> player, sf::RenderWindow &window) {
+void Handler::easyAttackerSpecifics(std::shared_ptr<EasyAttacker> easyAttacker, sf::RenderWindow &window) {
+    
+    if(easyAttacker->shouldSpawnBullet()) {
+        std::shared_ptr<Bullet> bullet(new Bullet(easyAttacker->sprite.getPosition().x, easyAttacker->sprite.getPosition().y, ENEMY_BULLET, ALIVE));
+        bullet->init(window);
+        gameObjects.push_back(bullet);
+    }
+    
+    
+}
+
+void Handler::playerSpecifics(std::shared_ptr<Player> player, sf::RenderWindow &window) {
     
     double rotation = 0.0;
     
@@ -101,16 +122,12 @@ void Handler::spawnBullet(std::shared_ptr<Player> player, sf::RenderWindow &wind
 bool Handler::isCollidingWithInvinciblePlayer(std::shared_ptr<Entity> entityObject, std::shared_ptr<Entity> entityObject2) {
     
     if(entityObject->getEntityType() == PLAYER) {
-        //std::cout << "found player" << std::endl;
         if((std::static_pointer_cast<Player>(entityObject))->isFlickering()) {
-            //std::cout << "is flickering" << std::endl;
             return true;
         }
     }
     else if(entityObject->getEntityType() == PLAYER) {
-        //std::cout << "found player" << std::endl;
         if((std::static_pointer_cast<Player>(entityObject2))->isFlickering()) {
-            //std::cout << "is flickering" << std::endl;
             return true;
         }
     }

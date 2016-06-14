@@ -12,6 +12,7 @@
 #include "ResourcePath.hpp"
 #include <iostream>
 #include <cmath>
+#include "Shoot.hpp"
 
 using namespace sf;
 using namespace std;
@@ -50,12 +51,22 @@ void Player::notify(char keyData) {
 
 void Player::collision(entity_t type) {
     
+    switch(type) {
+        case EASY_ATTACKER:
+        case ENEMY_BULLET:
+        case ASTEROID:
+            death();
+            break;
+        default:
+            break;
+    }
+    
     if(type == ASTEROID) {
         death();
     }
     
     if(type == ENEMY_BULLET) {
-       death();
+        death();
     }
     
 }
@@ -126,9 +137,7 @@ void Player::movementFrames() {
 
 void Player::move(RenderWindow &window) {
     
-    if(shootDelay > 0) {
-        --shootDelay;
-    }
+    shoot.update();
     
     if(!waitUntilReleased) {
         if((keyData & upData) == upData) {
@@ -159,60 +168,62 @@ void Player::move(RenderWindow &window) {
             
         }
         
-        if((keyData & leftData) == leftData) {
-            
-            sprite.rotate(-3);
-            
-        }
-        else if((keyData & rightData) == rightData) {
-            sprite.rotate(3);
-        }
-        
-        sprite.move(deltaX, deltaY);
-        
-        Vector2f newPos = sprite.getPosition();
-        
-        if(sprite.getPosition().x > WIDTH) {
-            newPos.x = 0;
-        }
-        else if(sprite.getPosition().x < 0) {
-            newPos.x = WIDTH;
-        }
-        
-        if(sprite.getPosition().y > HEIGHT) {
-            newPos.y = 0;
-        }
-        else if(sprite.getPosition().y < 0) {
-            newPos.y = HEIGHT;
-        }
-        
-        sprite.setPosition(newPos);
-        
-        if(((keyData & spaceData) == spaceData) && shootDelay == 0 ) {
-            spawnBullet = true;
-        }
     }
     else if((keyData & upReleased) == upReleased) {
         waitUntilReleased = false;
     }
     
+    if((keyData & leftData) == leftData) {
+        
+        sprite.rotate(-5);
+        
+    }
+    else if((keyData & rightData) == rightData) {
+        sprite.rotate(5);
+    }
+    
+    sprite.move(deltaX, deltaY);
+    
+    Vector2f newPos = sprite.getPosition();
+    
+    if(sprite.getPosition().x > WIDTH) {
+        newPos.x = 0;
+    }
+    else if(sprite.getPosition().x < 0) {
+        newPos.x = WIDTH;
+    }
+    
+    if(sprite.getPosition().y > HEIGHT) {
+        newPos.y = 0;
+    }
+    else if(sprite.getPosition().y < 0) {
+        newPos.y = HEIGHT;
+    }
+    
+    sprite.setPosition(newPos);
+    
+    if(((keyData & spaceData) == spaceData)/* && shoot.shouldSpawnBullet()*/) {
+        spawnBullet = true;
+    }
+    else {
+        spawnBullet = false;
+    }
+    
 }
 
 void Player::update(RenderWindow &window) {
+    
     move(window);
     
 }
 
 bool Player::shouldSpawnBullet(double &changeRotation) {
     
-    if(spawnBullet) {
-        changeRotation = sprite.getRotation();
-        spawnBullet = false;
-        shootDelay = 30;
-        return true;
-    }
+
+    changeRotation = sprite.getRotation();
     
-    return false;
+    return shoot.shouldSpawnBullet() && spawnBullet;
+    
     
 }
 
@@ -221,7 +232,7 @@ double Player::degreesToRadians(double degrees) {
 }
 
 void Player::death() {
-
+    
     sprite.setPosition(WIDTH/2, HEIGHT/2);
     
     deltaX = 0;

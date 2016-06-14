@@ -10,6 +10,7 @@
 #include "ResourcePath.hpp"
 #include <cmath>
 #include <iostream>
+#include <random>
 
 void Bullet::init(sf::RenderWindow &window) {
     
@@ -27,8 +28,20 @@ void Bullet::init(sf::RenderWindow &window) {
     sprite.setOrigin(texture.getSize().x/2, texture.getSize().y/2);
     sprite.setScale(2, 2);
     
-    deltaX = (sin(degreesToRadians(rotation+0.5)))*speed;
-    deltaY = (-1 * (cos(degreesToRadians(rotation+0.5))))*speed;
+    if(makeRotationRandom) {
+        std::random_device rd;
+        
+        std::mt19937 mt(rd());
+        
+        std::uniform_int_distribution<int> dist(0, 359);
+        
+        deltaX = (sin(degreesToRadians(dist(mt)+0.5)))*speed;
+        deltaY = (-1 * (cos(degreesToRadians(dist(mt)+0.5))))*speed;
+    }
+    else {
+        deltaX = (sin(degreesToRadians(rotation+0.5)))*speed;
+        deltaY = (-1 * (cos(degreesToRadians(rotation+0.5))))*speed;
+    }
     
     //sprite.move(deltaX, deltaY);
     
@@ -71,10 +84,16 @@ void Bullet::render(sf::RenderWindow &window) {
 
 void Bullet::collision(entity_t type) {
     
-    if(type ==  ASTEROID) {
-        death();
+    switch(type) {
+        case ASTEROID:
+        case PLAYER_BULLET:
+        case EASY_ATTACKER:
+        case ENEMY_BULLET:
+            death();
+            break;
+        default:
+            break;
     }
-    
 }
 
 Bullet::~Bullet() {

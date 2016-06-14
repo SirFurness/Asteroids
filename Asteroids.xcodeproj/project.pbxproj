@@ -16,6 +16,9 @@
 		073F8C0D1CF15D6D00D127F9 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 073F8C0B1CF15D6D00D127F9 /* Player.cpp */; };
 		074A0AC41CF75D8900887B77 /* Asteroid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 074A0AC21CF75D8900887B77 /* Asteroid.cpp */; };
 		075EA2701CF3FDD800EB7605 /* asteroidShip.png in Resources */ = {isa = PBXBuildFile; fileRef = 075EA26F1CF3FDD800EB7605 /* asteroidShip.png */; };
+		075EC0EF1CFF924900229080 /* EasyAttacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 075EC0ED1CFF924900229080 /* EasyAttacker.cpp */; };
+		075EC0F11CFF946800229080 /* easyAttacker.png in Resources */ = {isa = PBXBuildFile; fileRef = 075EC0F01CFF946800229080 /* easyAttacker.png */; };
+		07A8ACA11D0C9CD800389C6E /* Shoot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A8AC9F1D0C9CD800389C6E /* Shoot.cpp */; };
 		07D17A491CF7A65B000AC6DE /* asteroid.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D17A481CF7A65B000AC6DE /* asteroid.png */; };
 		07D32A6E1CF927BF003AA79E /* asteroidShipMoving.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D32A6D1CF927BF003AA79E /* asteroidShipMoving.png */; };
 		07DEDB971CF530FE00C8384A /* InputHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07DEDB951CF530FE00C8384A /* InputHandler.cpp */; };
@@ -40,7 +43,12 @@
 		074A0AC21CF75D8900887B77 /* Asteroid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Asteroid.cpp; sourceTree = "<group>"; };
 		074A0AC31CF75D8900887B77 /* Asteroid.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Asteroid.hpp; sourceTree = "<group>"; };
 		075EA26F1CF3FDD800EB7605 /* asteroidShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroidShip.png; sourceTree = "<group>"; };
+		075EC0ED1CFF924900229080 /* EasyAttacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EasyAttacker.cpp; sourceTree = "<group>"; };
+		075EC0EE1CFF924900229080 /* EasyAttacker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EasyAttacker.hpp; sourceTree = "<group>"; };
+		075EC0F01CFF946800229080 /* easyAttacker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = easyAttacker.png; sourceTree = "<group>"; };
 		079B91121CFBFE190074180F /* entity_state_t.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = entity_state_t.hpp; sourceTree = "<group>"; };
+		07A8AC9F1D0C9CD800389C6E /* Shoot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shoot.cpp; sourceTree = "<group>"; };
+		07A8ACA01D0C9CD800389C6E /* Shoot.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Shoot.hpp; sourceTree = "<group>"; };
 		07D17A481CF7A65B000AC6DE /* asteroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroid.png; sourceTree = "<group>"; };
 		07D32A691CF90E6B003AA79E /* game_state_t.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = game_state_t.hpp; sourceTree = "<group>"; };
 		07D32A6D1CF927BF003AA79E /* asteroidShipMoving.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroidShipMoving.png; sourceTree = "<group>"; };
@@ -88,6 +96,7 @@
 		073F8BEF1CF14D6100D127F9 /* Asteroids */ = {
 			isa = PBXGroup;
 			children = (
+				07A8AC9E1D0C9CC300389C6E /* Components */,
 				073DB55C1CFA7E350086A199 /* Enums */,
 				07D32A641CF90C19003AA79E /* Handlers */,
 				075EA2741CF4254E00EB7605 /* Entities */,
@@ -111,6 +120,7 @@
 		073F8BF71CF14D6100D127F9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				075EC0F01CFF946800229080 /* easyAttacker.png */,
 				073DB5631CFAA1020086A199 /* Bullet.png */,
 				07D32A6D1CF927BF003AA79E /* asteroidShipMoving.png */,
 				07D17A481CF7A65B000AC6DE /* asteroid.png */,
@@ -124,6 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				073F8C091CF1509C00D127F9 /* Entity.hpp */,
+				075EC0ED1CFF924900229080 /* EasyAttacker.cpp */,
+				075EC0EE1CFF924900229080 /* EasyAttacker.hpp */,
 				073F8C0B1CF15D6D00D127F9 /* Player.cpp */,
 				073F8C0C1CF15D6D00D127F9 /* Player.hpp */,
 				074A0AC21CF75D8900887B77 /* Asteroid.cpp */,
@@ -132,6 +144,15 @@
 				073DB5611CFA9AB90086A199 /* Bullet.hpp */,
 			);
 			name = Entities;
+			sourceTree = "<group>";
+		};
+		07A8AC9E1D0C9CC300389C6E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				07A8AC9F1D0C9CD800389C6E /* Shoot.cpp */,
+				07A8ACA01D0C9CD800389C6E /* Shoot.hpp */,
+			);
+			name = Components;
 			sourceTree = "<group>";
 		};
 		07D32A641CF90C19003AA79E /* Handlers */ = {
@@ -206,6 +227,7 @@
 				07D32A6E1CF927BF003AA79E /* asteroidShipMoving.png in Resources */,
 				075EA2701CF3FDD800EB7605 /* asteroidShip.png in Resources */,
 				073F8BFD1CF14D6100D127F9 /* sansation.ttf in Resources */,
+				075EC0F11CFF946800229080 /* easyAttacker.png in Resources */,
 				07D17A491CF7A65B000AC6DE /* asteroid.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,11 +257,13 @@
 			files = (
 				073F8BF61CF14D6100D127F9 /* main.cpp in Sources */,
 				073F8C071CF14F7B00D127F9 /* Handler.cpp in Sources */,
+				075EC0EF1CFF924900229080 /* EasyAttacker.cpp in Sources */,
 				073DB5621CFA9AB90086A199 /* Bullet.cpp in Sources */,
 				073F8BF31CF14D6100D127F9 /* ResourcePath.mm in Sources */,
 				07DEDB971CF530FE00C8384A /* InputHandler.cpp in Sources */,
 				074A0AC41CF75D8900887B77 /* Asteroid.cpp in Sources */,
 				073F8C0D1CF15D6D00D127F9 /* Player.cpp in Sources */,
+				07A8ACA11D0C9CD800389C6E /* Shoot.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

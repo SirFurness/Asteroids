@@ -7,14 +7,13 @@
 //
 
 #include "Entity.hpp"
+#include "Shoot.hpp"
 
 #ifndef Player_hpp
 #define Player_hpp
 
 class Player : public Entity {
 private:
-    
-    const int WIDTH = 800, HEIGHT = 600;
     
     double acceleration = 0.3, rotation = 0, deltaX, deltaY, friction = 0.98, maxSpeed = 15;
     
@@ -55,8 +54,6 @@ private:
     bool everyotherMove = false, flickerSpeedMove = 2, isFlickeringMove = true, drawMove = false;
     int framesPassedMove = 20;
     
-    int shootDelay = 0;
-    
     bool movingUp = false;
     
     bool spawnBullet = false;
@@ -67,8 +64,10 @@ private:
 
     void invincibilityFrames();
     
+    Shoot shoot;
+    
 public:
-    Player(int x, int y, int health, entity_t entityType, entity_state_t entityState) : Entity(x, y, entityType, entityState), health(health) {}
+    Player(int x, int y, int health, entity_t entityType, entity_state_t entityState) : Entity(x, y, entityType, entityState), health(health), shoot(30) {}
     ~Player() {}
     
     void init(sf::RenderWindow &window);

@@ -18,6 +18,8 @@
 class Entity {
 protected:
     
+    const int WIDTH = 800, HEIGHT = 600;
+    
     int x, y;
     //int width, height;
     
