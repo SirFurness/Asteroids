@@ -32,6 +32,7 @@ public:
     bool isInvincible = false;
     int splitTimes = 1;
     
+    Asteroid(entity_t entityType, entity_state_t entityState) : Entity(x, y, entityType, entityState), mt(rd()), dist(-5, 5), deltaAlreadyMade(false) {x = dist(mt); y = dist(mt);}
     Asteroid(int x, int y, entity_t entityType, entity_state_t entityState) : Entity(x, y, entityType, entityState), mt(rd()), dist(-5, 5), deltaAlreadyMade(false) {}
     Asteroid(int x, int y, double deltaX, double deltaY, entity_t entityType, entity_state_t entityState) : Entity(x, y, entityType, entityState), deltaX(deltaX), deltaY(deltaY), mt(rd()), dist(-5, 5), deltaAlreadyMade(true) {}
     ~Asteroid() {}

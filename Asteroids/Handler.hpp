@@ -31,6 +31,8 @@ private:
     void easyAttackerSpecifics(std::shared_ptr<EasyAttacker> easyAttacker, sf::RenderWindow &window);
     void asteroidSpecifics(std::shared_ptr<Asteroid> asteroid, sf::RenderWindow &window);
     void splitAsteroid(std::shared_ptr<Asteroid> asteroid, sf::RenderWindow &window);
+    
+    const int WIDTH = 800, HEIGHT = 600;
 public:
     
     std::vector<std::shared_ptr<Entity>> gameObjects;
@@ -41,7 +43,9 @@ public:
     void render(sf::RenderWindow &window, game_state_t gameState);
     void update(sf::RenderWindow &window, game_state_t gameState);
     void init(sf::RenderWindow &window);
-    void cleanUp(sf::RenderWindow &window, game_state_t gameState);
+    void cleanUp(sf::RenderWindow &window, game_state_t &gameState);
+    
+    void createLevel(int level);
     
     void listen(sf::RenderWindow &window);
 };

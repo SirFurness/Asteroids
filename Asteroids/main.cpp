@@ -34,18 +34,12 @@ int main()
     
     //std::shared_ptr<Entity> player = std::make_shared<Player>(new Player(WIDTH/2, HEIGHT/2, 3, PLAYER, ALIVE));
     
-    std::shared_ptr<Entity> player(new Player(WIDTH/2, HEIGHT/2, 3, PLAYER, ALIVE));
-    
-    std::shared_ptr<Entity> asteroid(new Asteroid(100, 200, ASTEROID, ALIVE));
-    
-    std::shared_ptr<Entity> asteroid2(new Asteroid(200, 100, ASTEROID, ALIVE));
-    
     //std::shared_ptr<Entity> easyAttacker(new EasyAttacker(10, 10, EASY_ATTACKER, ALIVE));
     
-    handler.gameObjects.push_back(player);
-    handler.gameObjects.push_back(asteroid);
-    handler.gameObjects.push_back(asteroid2);
+    
     //handler.gameObjects.push_back(easyAttacker);
+    
+    handler.createLevel(1);
     
     handler.init(window);
     

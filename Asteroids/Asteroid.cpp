@@ -42,6 +42,13 @@ void Asteroid::init(RenderWindow &window) {
         deltaY = dist(mt);
     }
     
+    while(deltaX == 0) {
+        deltaX = dist(mt);
+    }
+    while(deltaY == 0) {
+        
+        deltaY = dist(mt);
+    }
     
 }
 

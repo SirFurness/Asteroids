@@ -38,6 +38,9 @@ void Player::init(RenderWindow &window) {
     sprite.setTexture(texture);
     sprite.setOrigin(texture.getSize().x/2, texture.getSize().y/2);
     
+    
+    healthSprite.setTexture(texture);
+    healthSprite.setOrigin(texture.getSize().x/2, texture.getSize().y/2);
 }
 
 void Player::notify(char keyData) {
@@ -65,6 +68,17 @@ void Player::collision(entity_t type) {
     
 }
 
+void Player::drawHealth(RenderWindow &window) {
+    
+    for(int i = 0; i < health; i++) {
+        
+        healthSprite.setPosition(20*(i+1), 20);
+        window.draw(healthSprite);
+        
+    }
+    
+}
+
 void Player::render(RenderWindow &window) {
     invincibilityFrames();
     
@@ -72,6 +86,8 @@ void Player::render(RenderWindow &window) {
     
     if(draw)
         window.draw(sprite);
+    
+    drawHealth(window);
 }
 
 void Player::invincibilityFrames() {
@@ -227,7 +243,9 @@ double Player::degreesToRadians(double degrees) {
 
 void Player::death() {
     
-    health -= 1;
+    if(!isFlickering()) {
+        health -= 1;
+    }
     
     if(health == 0) {
         entityState = DEAD;

@@ -83,7 +83,7 @@ void Handler::update(sf::RenderWindow &window, game_state_t gameState) {
     
 }
 
-void Handler::cleanUp(sf::RenderWindow &window, game_state_t gameState) {
+void Handler::cleanUp(sf::RenderWindow &window, game_state_t &gameState) {
     
     decltype(gameObjects.begin()) it;
     
@@ -178,6 +178,28 @@ bool Handler::isCollidingWithInvinciblePlayer(std::shared_ptr<Entity> entityObje
     }
     
     return false;
+    
+}
+
+void Handler::createLevel(int level) {
+    
+    switch (level) {
+        case 1:
+            std::shared_ptr<Entity> player(new Player(WIDTH/2, HEIGHT/2, 3, PLAYER, ALIVE));
+            
+            for(int i = 0; i < 4; i++) {
+                
+                std::shared_ptr<Entity> asteroid(new Asteroid(ASTEROID, ALIVE));
+                gameObjects.push_back(asteroid);
+                
+            }
+            
+            gameObjects.push_back(player);
+            break;
+            
+        //default:
+          //  break;
+    }
     
 }
 

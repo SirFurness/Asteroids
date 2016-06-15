@@ -9,6 +9,12 @@
 #ifndef Animation_hpp
 #define Animation_hpp
 
-#include <stdio.h>
+class Animation {
+    
+private:
+public:
+    
+    
+};
 
 #endif /* Animation_hpp */

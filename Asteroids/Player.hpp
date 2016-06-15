@@ -45,7 +45,7 @@ private:
     int flickerSpeedInv = 4;
     
     //length in seconds that the sprite flickering should last
-    int flickerLengthInv = 1;
+    int flickerLengthInv = 2;
     
     //says whether spriteflickering is active so that game knows not to take damage
     bool isFlickeringInv = true;
@@ -65,6 +65,9 @@ private:
     void invincibilityFrames();
     
     Shoot shoot;
+    
+    void drawHealth(sf::RenderWindow &window);
+    sf::Sprite healthSprite;
     
 public:
     Player(int x, int y, int health, entity_t entityType, entity_state_t entityState) : Entity(x, y, entityType, entityState), health(health), shoot(30) {}
