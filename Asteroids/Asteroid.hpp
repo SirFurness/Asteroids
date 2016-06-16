@@ -12,11 +12,14 @@
 #include "Entity.hpp"
 #include <SFML/Graphics.hpp>
 #include <random>
+#include <vector>
 
 class Asteroid : public Entity {
 private:
     
     sf::Texture texture;
+    
+    std::vector<sf::Texture> textures;
     
     double deltaX = 0, deltaY = 0;
     bool deltaAlreadyMade;
@@ -31,6 +34,7 @@ private:
 public:
     bool isInvincible = false;
     int splitTimes = 1;
+    int maxSplitTimes = 3;
     
     Asteroid(entity_t entityType, entity_state_t entityState) : Entity(x, y, entityType, entityState), mt(rd()), dist(-5, 5), deltaAlreadyMade(false) {x = dist(mt); y = dist(mt);}
     Asteroid(int x, int y, entity_t entityType, entity_state_t entityState) : Entity(x, y, entityType, entityState), mt(rd()), dist(-5, 5), deltaAlreadyMade(false) {}

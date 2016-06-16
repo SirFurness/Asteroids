@@ -8,86 +8,100 @@
 
 #include "InputHandler.hpp"
 #include <iostream>
+#include "game_state_t.hpp"
+#include <map>
 
-char InputHandler::createData(sf::Event event) {
+char InputHandler::createData(sf::Event event, game_state_t gameState) {
     
-    if(event.type == sf::Event::KeyPressed) {
-        data |= pressedData;
+    if(gameState == PLAYING) {
         
-        switch(event.key.code) {
-            case sf::Keyboard::Up:
-            case sf::Keyboard::W:
-                data |= upData;
-                data &= ~upReleased;
-                break;
-            default:
-                break;
+        if(event.type == sf::Event::KeyPressed) {
+            data |= pressedData;
+            
+            switch(event.key.code) {
+                case sf::Keyboard::Up:
+                case sf::Keyboard::W:
+                    data |= upData;
+                    data &= ~upReleased;
+                    break;
+                default:
+                    break;
+            }
+            
+            switch(event.key.code) {
+                case sf::Keyboard::Left:
+                case sf::Keyboard::A:
+                    data |= leftData;
+                    data &= ~rightData;
+                    break;
+                case sf::Keyboard::Right:
+                case sf::Keyboard::D:
+                    data |= rightData;
+                    data &= ~leftData;
+                default:
+                    break;
+            }
+            
+            switch(event.key.code) {
+                case sf::Keyboard::Space:
+                    data |= spaceData;
+                    break;
+                default:
+                    break;
+            }
+            
         }
         
-        switch(event.key.code) {
-            case sf::Keyboard::Left:
-            case sf::Keyboard::A:
-                data |= leftData;
-                data &= ~rightData;
-                break;
-            case sf::Keyboard::Right:
-            case sf::Keyboard::D:
-                data |= rightData;
-                data &= ~leftData;
-            default:
-                break;
+        if(event.type == sf::Event::KeyReleased) {
+            
+            data |= releasedData;
+            
+            switch(event.key.code) {
+                case sf::Keyboard::Up:
+                case sf::Keyboard::W:
+                    data |= upReleased;
+                    data &= ~upData;
+                    break;
+                default:
+                    break;
+            }
+            
+            switch(event.key.code) {
+                case sf::Keyboard::Left:
+                case sf::Keyboard::A:
+                    data &= ~leftData;
+                    break;
+                case sf::Keyboard::Right:
+                case sf::Keyboard::D:
+                    data &= ~rightData;
+                    break;
+                default:
+                    break;
+            }
+            
+            switch(event.key.code) {
+                case sf::Keyboard::Space:
+                    data &= ~spaceData;
+                    break;
+                default:
+                    break;
+            }
+            
         }
+    }
+    
+    else if(gameState == MENU) {
         
-        switch(event.key.code) {
-            case sf::Keyboard::Space:
-                data |= spaceData;
+        switch (event.key.code) {
+            case sf::Keyboard::Y:
+                data |= yData;
                 break;
             default:
+                data = 0;
                 break;
         }
         
     }
-    
-    if(event.type == sf::Event::KeyReleased) {
-        
-        data |= releasedData;
-        
-        switch(event.key.code) {
-            case sf::Keyboard::Up:
-            case sf::Keyboard::W:
-                data |= upReleased;
-                data &= ~upData;
-                break;
-            default:
-                break;
-        }
-        
-        switch(event.key.code) {
-            case sf::Keyboard::Left:
-            case sf::Keyboard::A:
-                data &= ~leftData;
-                break;
-            case sf::Keyboard::Right:
-            case sf::Keyboard::D:
-                data &= ~rightData;
-                break;
-            default:
-                break;
-        }
-        
-        switch(event.key.code) {
-            case sf::Keyboard::Space:
-                data &= ~spaceData;
-                break;
-            default:
-                break;
-        }
-        
-    }
-    
-    
     
     return data;
-    
-    
 }

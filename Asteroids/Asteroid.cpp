@@ -20,18 +20,35 @@ void Asteroid::init(RenderWindow &window) {
     
     acceleration = dist(mt);
     
-    if(splitTimes == 1) {
-        if(!texture.loadFromFile(resourcePath()+"asteroid.png")) {
-            cout << "Couldn't load asteroid image!" << endl;
-            return EXIT_FAILURE;
+    for(int i = 0; i < maxSplitTimes; i++) {
+        sf::Texture text;
+        
+        switch (i) {
+            case 0:
+                if(!text.loadFromFile(resourcePath()+"asteroidBig.png")) {
+                    cout << "Couldn't load asteroid image!" << endl;
+                    return EXIT_FAILURE;
+                }
+                break;
+            case 1:
+                if(!text.loadFromFile(resourcePath()+"asteroid.png")) {
+                    cout << "Couldn't load asteroid image!" << endl;
+                    return EXIT_FAILURE;
+                }
+                break;
+            case 2:
+                if(!text.loadFromFile(resourcePath()+"asteroidSmall.png")) {
+                    cout << "Couldn't load asteroid image!" << endl;
+                    return EXIT_FAILURE;
+                }
+                break;
+            default:
+                break;
         }
+        textures.push_back(text);
     }
-    else {
-        if(!texture.loadFromFile(resourcePath()+"asteroidSmall.png")) {
-            cout << "Couldn't load asteroidSmall  image!" << endl;
-            return EXIT_FAILURE;
-        }
-    }
+    
+    texture = textures[splitTimes-1];
     
     sprite.setTexture(texture);
     sprite.setPosition(x, y);
@@ -60,8 +77,8 @@ void Asteroid::asteroidSplit(std::shared_ptr<Asteroid> &asteroid1, std::shared_p
     asteroid1 = asteroidTemp;
     asteroid2 = asteroidTemp2;
     
-    asteroid1->splitTimes += 1;
-    asteroid2->splitTimes += 1;
+    asteroid1->splitTimes = splitTimes+1;
+    asteroid2->splitTimes = splitTimes+1;
     
 }
 

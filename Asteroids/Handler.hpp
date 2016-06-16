@@ -32,13 +32,16 @@ private:
     void asteroidSpecifics(std::shared_ptr<Asteroid> asteroid, sf::RenderWindow &window);
     void splitAsteroid(std::shared_ptr<Asteroid> asteroid, sf::RenderWindow &window);
     
+    void switchStates(game_state_t &current, game_state_t next, sf::RenderWindow &window);
+    
+    
     const int WIDTH = 800, HEIGHT = 600;
 public:
     
     std::vector<std::shared_ptr<Entity>> gameObjects;
     std::vector<std::shared_ptr<Entity>> toBeAdded;
     
-    void collision(sf::RenderWindow &window);
+    void collision(sf::RenderWindow &window, game_state_t gameState);
     void notify(char data);
     void render(sf::RenderWindow &window, game_state_t gameState);
     void update(sf::RenderWindow &window, game_state_t gameState);
@@ -46,6 +49,7 @@ public:
     void cleanUp(sf::RenderWindow &window, game_state_t &gameState);
     
     void createLevel(int level);
+    void createMenu();
     
     void listen(sf::RenderWindow &window);
 };

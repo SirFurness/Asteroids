@@ -8,6 +8,7 @@
 
 #include "Entity.hpp"
 #include "Shoot.hpp"
+#include "Animation.hpp"
 
 #ifndef Player_hpp
 #define Player_hpp
@@ -16,8 +17,7 @@ class Player : public Entity {
 private:
     
     double acceleration = 0.3, rotation = 0, deltaX, deltaY, friction = 0.98, maxSpeed = 15;
-    
-    int health;
+
     unsigned char keyData = 0, upData = 1<<7, spaceData = 1<<6, leftData = 1<<5, rightData = 1<<4, pressedData = 1<<3, releasedData = 1<<2, upReleased = 1<<1;
     
     unsigned char otherData = 0, isInvincible = 1<<7, collidedData = 1<<6;
@@ -69,7 +69,12 @@ private:
     void drawHealth(sf::RenderWindow &window);
     sf::Sprite healthSprite;
     
+    //Animation animation;
+    
 public:
+    
+    int health;
+    
     Player(int x, int y, int health, entity_t entityType, entity_state_t entityState) : Entity(x, y, entityType, entityState), health(health), shoot(30) {}
     ~Player() {}
     

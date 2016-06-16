@@ -19,6 +19,9 @@ using namespace std;
 
 void Player::init(RenderWindow &window) {
     
+    health = 3;
+    entityState = ALIVE;
+    
     if(!texture.loadFromFile(resourcePath()+"asteroidShip.png")) {
         std::cout << "Couldn't load ship texture!" << std::endl;
         return EXIT_FAILURE;
@@ -34,13 +37,15 @@ void Player::init(RenderWindow &window) {
     moveTexture.setSmooth(true);
     
     //sprite.setScale(1.6, 1.6);
-    sprite.setPosition(x, y);
     sprite.setTexture(texture);
+    sprite.setPosition(WIDTH/2, HEIGHT/2);
     sprite.setOrigin(texture.getSize().x/2, texture.getSize().y/2);
     
     
     healthSprite.setTexture(texture);
     healthSprite.setOrigin(texture.getSize().x/2, texture.getSize().y/2);
+    
+    //animation.startAnimation(animation.getFrames(animation.loadImage(resourcePath()+"explosion.png"), 5, 8, 500, 800), 0.1);
 }
 
 void Player::notify(char keyData) {
@@ -80,6 +85,7 @@ void Player::drawHealth(RenderWindow &window) {
 }
 
 void Player::render(RenderWindow &window) {
+    
     invincibilityFrames();
     
     movementFrames();
@@ -88,6 +94,7 @@ void Player::render(RenderWindow &window) {
         window.draw(sprite);
     
     drawHealth(window);
+    
 }
 
 void Player::invincibilityFrames() {
@@ -247,9 +254,8 @@ void Player::death() {
         health -= 1;
     }
     
-    if(health == 0) {
+    if(health <= 0) {
         entityState = DEAD;
-        
     }
     else {
         sprite.setPosition(WIDTH/2, HEIGHT/2);

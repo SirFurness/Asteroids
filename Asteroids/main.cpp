@@ -22,7 +22,7 @@ const int WIDTH = 800, HEIGHT = 600;
 
 int main()
 {
-    game_state_t gameState = PLAYING;
+    game_state_t gameState = MENU;
     
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Asteroids");
     
@@ -39,7 +39,9 @@ int main()
     
     //handler.gameObjects.push_back(easyAttacker);
     
-    handler.createLevel(1);
+    //handler.createLevel(1);
+    
+    handler.createMenu();
     
     handler.init(window);
     
@@ -53,13 +55,13 @@ int main()
             if(event.type == sf::Event::Closed) {
                 window.close();
             }
-            char data = inputHandler.createData(event);
+            char data = inputHandler.createData(event, gameState);
             handler.notify(data);
             
         }
         handler.update(window, gameState);
         
-        handler.collision(window);
+        handler.collision(window, gameState);
         
         handler.cleanUp(window, gameState);
         
