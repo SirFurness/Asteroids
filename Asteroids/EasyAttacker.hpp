@@ -2,9 +2,7 @@
 //  EasyAttacker.hpp
 //  Asteroids
 //
-//  Created by Eric Paul on 6/1/16.
-//  Copyright © 2016 Eric Paul. All rights reserved.
-//
+
 
 #ifndef EasyAttacker_hpp
 #define EasyAttacker_hpp
