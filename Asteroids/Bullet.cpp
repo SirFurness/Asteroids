@@ -2,9 +2,7 @@
 //  Bullet.cpp
 //  Asteroids
 //
-//  Created by Eric on 5/28/16.
-//  Copyright © 2016 Eric. All rights reserved.
-//
+
 
 #include "Bullet.hpp"
 #include "ResourcePath.hpp"
