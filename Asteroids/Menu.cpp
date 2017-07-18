@@ -2,9 +2,7 @@
 //  Menu.cpp
 //  Asteroids
 //
-//  Created by Eric Paul on 6/15/16.
-//  Copyright © 2016 Eric Paul. All rights reserved.
-//
+
 
 #include "Menu.hpp"
 #include <SFML/Graphics.hpp>
