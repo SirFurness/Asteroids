@@ -2,9 +2,7 @@
 //  EasyAttacker.cpp
 //  Asteroids
 //
-//  Created by Eric Paul on 6/1/16.
-//  Copyright © 2016 Eric Paul. All rights reserved.
-//
+
 
 #include "EasyAttacker.hpp"
 #include "ResourcePath.hpp"
