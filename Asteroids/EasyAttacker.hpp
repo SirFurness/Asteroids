@@ -1,7 +1,6 @@
 //
 //  EasyAttacker.hpp
 //  Asteroids
-//
 
 
 #ifndef EasyAttacker_hpp
