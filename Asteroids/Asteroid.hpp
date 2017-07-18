@@ -2,9 +2,7 @@
 //  Asteroid.hpp
 //  Asteroids
 //
-//  Created by Eric on 5/26/16.
-//  Copyright © 2016 Eric. All rights reserved.
-//
+
 
 #ifndef Asteroid_hpp
 #define Asteroid_hpp
