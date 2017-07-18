@@ -1,10 +1,7 @@
 //
 //  Shoot.hpp
 //  Asteroids
-//
-//  Created by Eric Paul on 6/11/16.
-//  Copyright © 2016 Eric Paul. All rights reserved.
-//
+
 
 #ifndef Shoot_hpp
 #define Shoot_hpp
