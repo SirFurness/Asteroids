@@ -2,9 +2,6 @@
 //  Component.hpp
 //  Asteroids
 //
-//  Created by Eric on 6/1/16.
-//  Copyright © 2016 Eric. All rights reserved.
-//
 
 #ifndef Component_hpp
 #define Component_hpp
