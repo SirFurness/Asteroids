@@ -2,9 +2,7 @@
 //  Handler.cpp
 //  Asteroids
 //
-//  Created by Eric on 5/21/16.
-//  Copyright © 2016 Eric. All rights reserved.
-//
+
 
 #include "Handler.hpp"
 #include <iostream>
