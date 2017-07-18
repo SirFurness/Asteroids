@@ -2,9 +2,7 @@
 //  Player.cpp
 //  Asteroids
 //
-//  Created by Eric on 5/21/16.
-//  Copyright © 2016 Eric. All rights reserved.
-//
+
 
 #include "Player.hpp"
 #include <SFML/Graphics.hpp>
